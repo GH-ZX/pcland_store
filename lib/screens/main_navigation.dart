@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:pcland_store/core/app_localizations.dart';
+import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/providers/cart_provider.dart';
 import 'package:pcland_store/screens/home_screen.dart';
 import 'package:pcland_store/screens/search_screen.dart';

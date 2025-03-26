@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
-import 'package:pcland_store/core/app_localizations.dart';
+import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/providers/product_provider.dart';
 import 'package:pcland_store/widgets/product_card.dart';
 import 'package:pcland_store/widgets/section_title.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pcland_store/core/app_localizations.dart';
+import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/providers/product_provider.dart';
 import 'package:pcland_store/widgets/product_grid_item.dart';
 

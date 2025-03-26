@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; // Localizations
-import 'package:pcland_store/core/app_localizations.dart';
-import 'package:pcland_store/core/app_theme.dart';
+import 'package:pcland_store/services/app_localizations.dart';
+import 'package:pcland_store/services/app_theme.dart';
 import 'package:provider/provider.dart'; // Providers }>
 import 'package:pcland_store/providers/theme_provider.dart';
 import 'package:pcland_store/providers/language_provider.dart';

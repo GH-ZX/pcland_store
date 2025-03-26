@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:pcland_store/core/app_localizations.dart';
+import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/providers/product_provider.dart';
 import 'package:pcland_store/providers/cart_provider.dart';
 import 'package:pcland_store/providers/favorites_provider.dart';
