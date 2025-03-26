@@ -26,7 +26,7 @@ void main() async {
   
   runApp(
     MultiProvider(
-      providers: [
+      providers: ي[
         ChangeNotifierProvider.value(value: themeProvider),
         ChangeNotifierProvider.value(value: languageProvider),
         ChangeNotifierProvider.value(value: userProvider),

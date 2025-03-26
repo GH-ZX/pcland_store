@@ -19,7 +19,6 @@ class AppTheme {
   static const Color darkSecondaryTextColor = Color(0xFFAAAAAA);
   static const Color dividerColor = Color(0xFFBDBDBD);
   static const Color darkDividerColor = Color(0xFF424242);
-  // Nuevos colores para mejorar el tema oscuro
   static const Color darkPrimaryColor = Color(0xFF1565C0);
   static const Color darkAccentColor = Color(0xFF64B5F6);
   static const Color darkSurfaceColor = Color(0xFF242424);
