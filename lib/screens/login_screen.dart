@@ -37,31 +37,28 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> login() async {
     if (isLoading) return;
+    if (!formKey.currentState!.validate()) return;
 
-    // التحقق من صحة النموذج
-    if (!formKey.currentState!.validate()) {
-      return;
-    }
-
-    setState(() {
-      isLoading = true;
-    });
+    setState(() => isLoading = true);
 
     try {
       final userProvider = Provider.of<UserProvider>(context, listen: false);
-      
-      // استدعاء دالة تسجيل الدخول من مزود المستخدم
       final success = await userProvider.login(
         emailController.text,
         passwordController.text,
       );
 
       if (success && mounted) {
-        Navigator.pushReplacementNamed(context, '/home');
+        Navigator.of(
+          context,
+        ).pushNamedAndRemoveUntil('/home', (route) => false);
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(userProvider.error ?? AppLocalizations.of(context).translate('login_failed')),
+            content: Text(
+              userProvider.error ??
+                  AppLocalizations.of(context).translate('login_failed'),
+            ),
             backgroundColor: Colors.red,
           ),
         );
@@ -86,10 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> loginWithGoogle() async {
     if (isGoogleLoading) return;
-
-    setState(() {
-      isGoogleLoading = true;
-    });
+    setState(() => isGoogleLoading = true);
 
     try {
       final userProvider = Provider.of<UserProvider>(context, listen: false);
@@ -99,8 +93,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (mounted) {
         if (success) {
-          print('Google sign-in successful, navigating to home');
-          Navigator.pushReplacementNamed(context, '/home');
+          Navigator.of(
+            context,
+          ).pushNamedAndRemoveUntil('/home', (route) => false);
         } else {
           print('Google sign-in failed: ${userProvider.error}');
           // Only show error if there's a specific error message
@@ -119,7 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(AppLocalizations.of(context).translate('google_login_failed')),
+            content: Text(
+              AppLocalizations.of(context).translate('google_login_failed'),
+            ),
             backgroundColor: Colors.red,
           ),
         );
@@ -134,14 +131,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void toggleLanguage() {
-    final languageProvider = Provider.of<LanguageProvider>(context, listen: false);
+    final languageProvider = Provider.of<LanguageProvider>(
+      context,
+      listen: false,
+    );
     languageProvider.toggleLanguage();
   }
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text(localizations.translate('login')),
@@ -169,7 +169,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 120,
                     height: 120,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
@@ -185,9 +187,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text(
                     'PCLand Store',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 40),
@@ -218,7 +220,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     prefixIcon: const Icon(Icons.lock),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        obscurePassword ? Icons.visibility : Icons.visibility_off,
+                        obscurePassword
+                            ? Icons.visibility
+                            : Icons.visibility_off,
                       ),
                       onPressed: () {
                         setState(() {
@@ -261,19 +265,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     foregroundColor: Colors.white,
                   ),
-                  child: isLoading
-                      ? const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 2,
+                  child:
+                      isLoading
+                          ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            ),
+                          )
+                          : Text(
+                            localizations.translate('login'),
+                            style: const TextStyle(fontSize: 16),
                           ),
-                        )
-                      : Text(
-                          localizations.translate('login'),
-                          style: const TextStyle(fontSize: 16),
-                        ),
                 ),
                 const SizedBox(height: 30),
                 // OR Divider
@@ -281,7 +286,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Expanded(
                       child: Divider(
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withOpacity(0.3),
                       ),
                     ),
                     Padding(
@@ -289,13 +296,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         localizations.translate('or'),
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onSurface.withOpacity(0.6),
                         ),
                       ),
                     ),
                     Expanded(
                       child: Divider(
-                        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withOpacity(0.3),
                       ),
                     ),
                   ],
@@ -307,40 +318,43 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     side: BorderSide(
-                      color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withOpacity(0.5),
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  icon: isGoogleLoading
-                      ? const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                          ),
-                        )
-                      : Container(
-                          height: 24,
-                          width: 24,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: Text(
-                              "G",
-                              style: TextStyle(
-                                color: Theme.of(context).brightness == Brightness.dark
-                                    ? Colors.black
-                                    : Colors.blue,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                  icon:
+                      isGoogleLoading
+                          ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                          : Container(
+                            height: 24,
+                            width: 24,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "G",
+                                style: TextStyle(
+                                  color:
+                                      Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Colors.black
+                                          : Colors.blue,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
                           ),
-                        ),
                   label: Text(localizations.translate('sign_in_with_google')),
                 ),
                 const SizedBox(height: 30),

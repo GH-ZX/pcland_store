@@ -2,27 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
+  // Light Theme Colors
   static const Color primaryColor = Color(0xFF0D47A1);
   static const Color secondaryColor = Color(0xFF1976D2);
   static const Color accentColor = Color(0xFF42A5F5);
+  static const Color backgroundColor = Color(0xFFF5F5F5);
+  static const Color cardColor = Colors.white;
+  static const Color textColor = Color(0xFF212121);
+  static const Color secondaryTextColor = Color(0xFF757575);
+  static const Color dividerColor = Color(0xFFBDBDBD);
+
+  // Dark Theme Colors
+  static const Color darkPrimaryColor = Color(0xFF1976D2);
+  static const Color darkAccentColor = Color(0xFF64B5F6);
+  static const Color darkBackgroundColor = Color(0xFF1E1E1E);
+  static const Color darkCardColor = Color(0xFF2C2C2C);
+  static const Color darkSurfaceColor = Color(0xFF323232);
+  static const Color darkTextColor = Color(0xFFF5F5F5);
+  static const Color darkSecondaryTextColor = Color(0xFFBDBDBD);
+  static const Color darkDividerColor = Color(0xFF525252);
+  static const Color darkElevatedColor = Color(0xFF383838);
+
+  // Status Colors
   static const Color errorColor = Color(0xFFD32F2F);
   static const Color successColor = Color(0xFF388E3C);
   static const Color warningColor = Color(0xFFFFA000);
   static const Color infoColor = Color(0xFF1976D2);
-  static const Color backgroundColor = Color(0xFFF5F5F5);
-  static const Color darkBackgroundColor = Color(0xFF121212);
-  static const Color cardColor = Colors.white;
-  static const Color darkCardColor = Color(0xFF1E1E1E);
-  static const Color textColor = Color(0xFF212121);
-  static const Color darkTextColor = Color(0xFFE0E0E0);
-  static const Color secondaryTextColor = Color(0xFF757575);
-  static const Color darkSecondaryTextColor = Color(0xFFAAAAAA);
-  static const Color dividerColor = Color(0xFFBDBDBD);
-  static const Color darkDividerColor = Color(0xFF424242);
-  static const Color darkPrimaryColor = Color(0xFF1565C0);
-  static const Color darkAccentColor = Color(0xFF64B5F6);
-  static const Color darkSurfaceColor = Color(0xFF242424);
-  static const Color darkElevatedColor = Color(0xFF2C2C2C);
 
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
@@ -67,22 +72,13 @@ class AppTheme {
         ),
       ),
       bodyLarge: GoogleFonts.cairo(
-        textStyle: const TextStyle(
-          color: textColor,
-          fontSize: 16,
-        ),
+        textStyle: const TextStyle(color: textColor, fontSize: 16),
       ),
       bodyMedium: GoogleFonts.cairo(
-        textStyle: const TextStyle(
-          color: textColor,
-          fontSize: 14,
-        ),
+        textStyle: const TextStyle(color: textColor, fontSize: 14),
       ),
       bodySmall: GoogleFonts.cairo(
-        textStyle: const TextStyle(
-          color: secondaryTextColor,
-          fontSize: 12,
-        ),
+        textStyle: const TextStyle(color: secondaryTextColor, fontSize: 12),
       ),
     ),
     appBarTheme: const AppBarTheme(
@@ -95,9 +91,7 @@ class AppTheme {
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       ),
     ),
@@ -105,18 +99,14 @@ class AppTheme {
       style: OutlinedButton.styleFrom(
         foregroundColor: primaryColor,
         side: const BorderSide(color: primaryColor),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       ),
     ),
@@ -148,9 +138,7 @@ class AppTheme {
     cardTheme: CardTheme(
       color: cardColor,
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
@@ -206,22 +194,13 @@ class AppTheme {
         ),
       ),
       bodyLarge: GoogleFonts.cairo(
-        textStyle: const TextStyle(
-          color: darkTextColor,
-          fontSize: 16,
-        ),
+        textStyle: const TextStyle(color: darkTextColor, fontSize: 16),
       ),
       bodyMedium: GoogleFonts.cairo(
-        textStyle: const TextStyle(
-          color: darkTextColor,
-          fontSize: 14,
-        ),
+        textStyle: const TextStyle(color: darkTextColor, fontSize: 14),
       ),
       bodySmall: GoogleFonts.cairo(
-        textStyle: const TextStyle(
-          color: darkSecondaryTextColor,
-          fontSize: 12,
-        ),
+        textStyle: const TextStyle(color: darkSecondaryTextColor, fontSize: 12),
       ),
     ),
     appBarTheme: const AppBarTheme(
@@ -234,9 +213,7 @@ class AppTheme {
         backgroundColor: darkPrimaryColor,
         foregroundColor: Colors.white,
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       ),
     ),
@@ -244,18 +221,14 @@ class AppTheme {
       style: OutlinedButton.styleFrom(
         foregroundColor: darkPrimaryColor,
         side: const BorderSide(color: darkPrimaryColor),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: darkPrimaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       ),
     ),
@@ -288,9 +261,7 @@ class AppTheme {
       color: darkCardColor,
       shadowColor: Colors.black45,
       elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: darkSurfaceColor,

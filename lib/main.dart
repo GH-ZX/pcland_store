@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; // Localizations
 import 'package:pcland_store/core/app_localizations.dart';
 import 'package:pcland_store/core/app_theme.dart';
-import 'package:provider/provider.dart';                    // Providers }>
+import 'package:provider/provider.dart'; // Providers }>
 import 'package:pcland_store/providers/theme_provider.dart';
 import 'package:pcland_store/providers/language_provider.dart';
 import 'package:pcland_store/providers/user_provider.dart';
@@ -14,7 +14,6 @@ import 'package:pcland_store/screens/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
 
   final themeProvider = ThemeProvider();
   final languageProvider = LanguageProvider();
@@ -61,10 +60,16 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home:
-          userProvider.isLoggedIn
-              ? const MainNavigation()
-              : const LoginScreen(),
+      routes: {
+        '/':
+            (context) =>
+                userProvider.isLoggedIn
+                    ? const MainNavigation()
+                    : const LoginScreen(),
+        '/home': (context) => const MainNavigation(),
+        '/login': (context) => const LoginScreen(),
+      },
+      initialRoute: '/',
     );
   }
 }
