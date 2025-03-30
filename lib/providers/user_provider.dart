@@ -50,7 +50,7 @@ class User {
     String? address,
   }) {
     return User(
-      id: this.id,
+      id: id,
       name: name ?? this.name,
       email: email ?? this.email,
       phoneNumber: phoneNumber ?? this.phoneNumber,
