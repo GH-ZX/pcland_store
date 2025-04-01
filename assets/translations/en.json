@@ -81,7 +81,6 @@
   "empty_cart_message": "Add items to your cart to see them here.(lol)",
   "empty_favorites": "No products in favorites",
   "empty_favorites_message": "Add items to your favorites to see them here.",
-  
   "no_results": "No results found",
   "search_hint": "What are U looking for?",
   "search_empty": "Try searching for something here.",
@@ -101,5 +100,9 @@
   "dark": "Dark",
   "light": "Light",
   "system": "Auto",
-  "Inbox": "Inbox"
+  "Inbox": "Inbox",
+  "logout_confirm": "Are you sure you want to logout?",
+  "yes": "Yes",
+  "no": "No",
+  "shipping info": "Shipping Information"
 }
