@@ -84,6 +84,8 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: localizations.translate('search_hint'),
+                hintStyle: TextStyle(color: Colors.grey.shade600),
+                
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
@@ -136,8 +138,11 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                                 ),
                                 const SizedBox(height: 16),
                                 Text(
-                                  localizations.translate('search_hint'),
-                                  style: Theme.of(context).textTheme.titleLarge,
+                                  localizations.translate('search_empty'),
+                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: Colors.grey.shade800,
+                                    ),
+                                  
                                 ),
                               ],
                             ),
@@ -154,17 +159,14 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
                               ),
                               itemCount: _searchResults.length,
                               itemBuilder: (ctx, index) {
-                                // Animación individual para cada elemento con retraso
                                 return AnimatedBuilder(
                                   animation: _animationController,
                                   builder: (context, child) {
-                                    // Retraso basado en el índice
                                     final delay = index * 0.1;
                                     final startValue = delay;
                                     final endValue = 1.0;
                                     final animationValue = _animationController.value;
                                     
-                                    // Calcular valor de opacidad con retraso
                                     final opacity = animationValue <= startValue 
                                         ? 0.0 
                                         : (animationValue - startValue) / (endValue - startValue);

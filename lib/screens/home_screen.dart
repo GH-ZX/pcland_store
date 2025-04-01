@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'title': 'Surface Laptop',
       'subtitle': 'Elegant and powerful',
       'color': Colors.blue.shade700,
+      'shadow': Colors.black.withOpacity(0.3),
     },
     {
       'image': 'https://p3-ofp.static.pub/ShareResource/na/subseries/hero/lenovo-thinkpad-x1-carbon-with-badge-hero.png',
@@ -54,7 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'https://www.amd.com/content/dam/amd/en/images/products/laptops/2201103-amd-advantage-laptop-rog-zephyrus-g14-video-thumbnail.png',
       'title': 'ASUS ROG Zephyrus G14',
       'subtitle': 'Most powerful gaming devices',
-      'color': Colors.red.shade600,
+      'color': const Color.fromARGB(255, 105, 18, 199),
+    },
+    {
+    'image': 'https://i.pcmag.com/imagery/reviews/01FIvTZt1sIxZydOira9RYm-5..v1680798175.jpg',
+      'title': 'MSI Katana GF66',
+      'subtitle': 'Best for business and productivity',
+      'color': Colors.red.shade800,
     },
   ];
 

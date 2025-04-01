@@ -13,6 +13,7 @@ import 'package:pcland_store/screens/main_navigation.dart';
 import 'package:pcland_store/screens/login_screen.dart';
 
 void main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
 
   final themeProvider = ThemeProvider();
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'PCLand Store',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

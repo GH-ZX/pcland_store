@@ -161,35 +161,72 @@ class UserProvider with ChangeNotifier {
     required String phoneNumber,
     String? profileImage,
     String? address,
-    String password = '123', // كلمة مرور افتراضية
+    String password = '123',
   }) async {
     _isLoading = true;
     _error = null;
     notifyListeners();
 
     try {
-      // تسجيل الدخول بالبيانات المحددة مباشرة
-      _user = User(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        name: name,
-        email: email,
-        phoneNumber: phoneNumber,
-        profileImage: profileImage ?? 'https://via.placeholder.com/150',
-        address: address,
-      );
-      
-      // حفظ بيانات المستخدم في التخزين المحلي
+      // Check if user already exists
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_userKey, jsonEncode(_user!.toJson()));
+      final usersJson = prefs.getString(_usersKey);
       
-      // إضافة المستخدم إلى قائمة المستخدمين المسجلين
-      await _addUserToRegisteredUsers(_user!, password);
+      if (usersJson != null) {
+        final users = List<Map<String, dynamic>>.from(jsonDecode(usersJson));
+        final existingUserIndex = users.indexWhere((u) => u['email'] == email);
+        
+        if (existingUserIndex != -1) {
+          // User exists, verify password
+          if (users[existingUserIndex]['password'] != password) {
+            _error = 'كلمة المرور غير صحيحة';
+            _isLoading = false;
+            notifyListeners();
+            return false;
+          }
+          
+          // Load existing user data
+          final userData = Map<String, dynamic>.from(users[existingUserIndex]);
+          userData.remove('password');
+          _user = User.fromJson(userData);
+        } else {
+          // Create new user
+          _user = User(
+            id: DateTime.now().millisecondsSinceEpoch.toString(),
+            name: name,
+            email: email,
+            phoneNumber: phoneNumber,
+            profileImage: profileImage ?? 'Icons.person',
+            address: address,
+          );
+          
+          // Add to registered users
+          await _addUserToRegisteredUsers(_user!, password);
+        }
+      } else {
+        // First user in the system
+        _user = User(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          name: name,
+          email: email,
+          phoneNumber: phoneNumber,
+          profileImage: profileImage ?? 'Icons.person',
+          address: address,
+        );
+        
+        // Add to registered users
+        await _addUserToRegisteredUsers(_user!, password);
+      }
+      
+      // Save current user session
+      await prefs.setString(_userKey, jsonEncode(_user!.toJson()));
       
       _isLoading = false;
       notifyListeners();
       return true;
     } catch (e) {
       _error = 'حدث خطأ أثناء تسجيل الدخول';
+      print('Login error: $e');
       _isLoading = false;
       notifyListeners();
       return false;
@@ -338,7 +375,7 @@ class UserProvider with ChangeNotifier {
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         name: name,
         email: email,
-        phoneNumber: phoneNumber,
+        phoneNumber: phoneNumber,  // تأكد من استخدام phoneNumber هنا
       );
       
       // حفظ بيانات المستخدم في التخزين المحلي

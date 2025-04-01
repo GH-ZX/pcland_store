@@ -166,7 +166,7 @@ class ProductCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '${product.price.toStringAsFixed(2)} ${localizations.isArabic ? 'ريال' : 'SAR'}',
+                        '${product.price.toStringAsFixed(2)} ${localizations.isArabic ? 'ل.ت' : 'TRY'}',
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,
@@ -175,7 +175,7 @@ class ProductCard extends StatelessWidget {
                       if (product.hasDiscount) const SizedBox(width: 4),
                       if (product.hasDiscount)
                         Text(
-                          '${product.oldPrice!.toStringAsFixed(2)}',
+                          product.oldPrice!.toStringAsFixed(2),
                           style: const TextStyle(
                             decoration: TextDecoration.lineThrough,
                             color: Colors.grey,

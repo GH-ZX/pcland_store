@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -21,28 +22,7 @@ class SettingsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.translate('settings')),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.help_outline),
-            onPressed: () {
-              // Show help dialog
-              showDialog(
-                context: context,
-                builder: (ctx) => AlertDialog(
-                  title: Text(localizations.translate('help')),
-                  content: Text(localizations.translate('help_description')),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.of(ctx).pop(),
-                      child: Text(localizations.translate('close')),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ],
+        title: Text(localizations.translate('settings')),        
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -140,7 +120,7 @@ class SettingsScreen extends StatelessWidget {
                     },
                     child: ListTile(
                       leading: const Icon(Icons.shopping_bag_outlined),
-                      title: Text(localizations.translate('my orders')),
+                      title: Text(localizations.translate('my_orders')),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     ),
                   ),
@@ -158,22 +138,10 @@ class SettingsScreen extends StatelessWidget {
                   const Divider(height: 1),
                   ListTile(
                     leading: const Icon(Icons.notifications_outlined),
-                    title: Text(localizations.translate('notifications')),
-                    trailing: Switch(
-                      value: true, // Get from provider
-                      onChanged: (value) {
-                        // Request notification permissions
-                        if (value) {
-                          _requestNotificationPermissions(context);
-                        }
-                        // Update notification settings
-                      },
-                      activeColor: Theme.of(context).colorScheme.primary,
-                    ),
-                    onTap: () {
-                      // Toggle notification switch when tapping the entire tile
-                      // This would need a provider to manage the notification state
-                    },
+                    title: Text(localizations.translate('inbox')),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    
+                  
                   ),
                 ],
               ),
@@ -181,111 +149,52 @@ class SettingsScreen extends StatelessWidget {
           if (userProvider.isLoggedIn) const SizedBox(height: 16),
 
           // App Settings Section
-          _buildSectionHeader(context, localizations.translate('app settings')),
+          _buildSectionHeader(context, localizations.translate('app_settings')),
           Card(
             elevation: 2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
-              children: [
+                children: [
                 // Theme Settings
                 InkWell(
                   onTap: () {
-                    // Show theme selection dialog
-                    _showThemeSelectionDialog(context, themeProvider, localizations);
+                  _showThemeSelectionDialog(context, themeProvider, localizations);
                   },
                   child: ListTile(
-                    leading: Icon(
-                      isDarkMode ? Icons.dark_mode : Icons.light_mode,
+                  leading: Icon(
+                    isDarkMode ? Icons.dark_mode : Icons.light_mode,
+                  ),
+                  title: Text(localizations.translate('theme')),
+                  trailing: Text(
+                    localizations.translate(
+                    themeProvider.themeMode == ThemeMode.system
+                      ? 'system'
+                      : themeProvider.themeMode == ThemeMode.light
+                        ? 'light'
+                        : 'dark'
                     ),
-                    title: Text(localizations.translate('theme')),
-                    trailing: DropdownButton<ThemeMode>(
-                      value: themeProvider.themeMode,
-                      underline: Container(),
-                      onChanged: (ThemeMode? newThemeMode) {
-                        if (newThemeMode != null) {
-                          themeProvider.setThemeMode(newThemeMode);
-                        }
-                      },
-                      items: [
-                        DropdownMenuItem(
-                          value: ThemeMode.system,
-                          child: Text(localizations.translate('system')),
-                        ),
-                        DropdownMenuItem(
-                          value: ThemeMode.light,
-                          child: Text(localizations.translate('light')),
-                        ),
-                        DropdownMenuItem(
-                          value: ThemeMode.dark,
-                          child: Text(localizations.translate('dark')),
-                        ),
-                      ],
-                    ),
+                  ),
                   ),
                 ),
                 const Divider(height: 1),
                 // Language Settings
                 InkWell(
                   onTap: () {
-                    // Show language selection dialog
-                    _showLanguageSelectionDialog(context, languageProvider, localizations);
+                  _showLanguageSelectionDialog(context, languageProvider, localizations);
                   },
                   child: ListTile(
-                    leading: const Icon(Icons.language),
-                    title: Text(localizations.translate('language')),
-                    trailing: DropdownButton<String>(
-                      value: languageProvider.currentLanguage,
-                      underline: Container(),
-                      onChanged: (String? newLanguage) {
-                        if (newLanguage != null) {
-                          languageProvider.setLanguage(newLanguage);
-                        }
-                      },
-                      items: [
-                        DropdownMenuItem(
-                          value: 'en',
-                          child: Text(localizations.isArabic ? 'الإنجليزية' : 'English'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'ar',
-                          child: Text(localizations.isArabic ? 'العربية' : 'Arabic'),
-                        ),
-                      ],
-                    ),
+                  leading: const Icon(Icons.language),
+                  title: Text(localizations.translate('language')),
+                  trailing: Text(
+                    localizations.translate(languageProvider.currentLanguage)
+                  ),
                   ),
                 ),
                 const Divider(height: 1),
-                // Font Size
-                InkWell(
-                  onTap: () {
-                    // Show font size selection dialog
-                  },
-                  child: ListTile(
-                    leading: const Icon(Icons.format_size),
-                    title: Text(localizations.translate('font size')),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.remove),
-                          onPressed: () {
-                            // Decrease font size
-                          },
-                        ),
-                        const Text('Normal'), // Get from provider
-                        IconButton(
-                          icon: const Icon(Icons.add),
-                          onPressed: () {
-                            // Increase font size
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                
+              ]
             ),
           ),
           const SizedBox(height: 16),
@@ -494,28 +403,6 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  void _requestNotificationPermissions(BuildContext context) async {
-    // Here you would implement the code to request notification permissions
-    // This is just a placeholder
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(AppLocalizations.of(context).translate('notifications')),
-        content: Text(AppLocalizations.of(context).translate('notification_permission_request')),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(false),
-            child: Text(AppLocalizations.of(context).translate('deny')),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(ctx).pop(true),
-            child: Text(AppLocalizations.of(context).translate('allow')),
-          ),
-        ],
-      ),
-    );
-  }
-
   void _showThemeSelectionDialog(BuildContext context, ThemeProvider themeProvider, AppLocalizations localizations) {
     showDialog(
       context: context,
@@ -567,7 +454,7 @@ class SettingsScreen extends StatelessWidget {
         title: Text(localizations.translate('select language')),
         children: [
           RadioListTile<String>(
-            title: Text(localizations.isArabic ? 'الإنجليزية' : 'English'),
+            title: Text(localizations.translate('en')),
             value: 'en',
             groupValue: languageProvider.currentLanguage,
             onChanged: (String? value) {
@@ -578,7 +465,7 @@ class SettingsScreen extends StatelessWidget {
             },
           ),
           RadioListTile<String>(
-            title: Text(localizations.isArabic ? 'العربية' : 'Arabic'),
+            title: Text(localizations.translate('ar')),
             value: 'ar',
             groupValue: languageProvider.currentLanguage,
             onChanged: (String? value) {

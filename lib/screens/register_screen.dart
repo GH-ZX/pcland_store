@@ -46,8 +46,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       final success = await userProvider.register(
         _nameController.text,
         _emailController.text,
+        _passwordController.text,  // تم تصحيح الترتيب هنا
         _phoneController.text,
-        _passwordController.text,
       );
 
       if (success && mounted) {
@@ -185,7 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     if (value == null || value.isEmpty) {
                       return localizations.translate('required_field');
                     }
-                    if (value.length < 6) {
+                    if (value.length < 3) {
                       return localizations.translate('password_short');
                     }
                     return null;
