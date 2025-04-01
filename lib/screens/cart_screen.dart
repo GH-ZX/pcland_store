@@ -24,129 +24,137 @@ class CartScreen extends StatelessWidget {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (ctx) => AlertDialog(
-                    title: Text(localizations.translate('clear')),
-                    content: Text(localizations.translate('empty_cart')),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(ctx).pop(),
-                        child: Text(localizations.translate('cancel')),
+                  builder:
+                      (ctx) => AlertDialog(
+                        title: Text(localizations.translate('clear')),
+                        content: Text(localizations.translate('empty_cart')),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(ctx).pop(),
+                            child: Text(localizations.translate('cancel')),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              cartProvider.clearCart();
+                              Navigator.of(ctx).pop();
+                            },
+                            child: Text(
+                              localizations.translate('clear'),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        ],
                       ),
-                      TextButton(
-                        onPressed: () {
-                          cartProvider.clearCart();
-                          Navigator.of(ctx).pop();
-                        },
-                        child: Text(
-                          localizations.translate('clear'),
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                      ),
-                    ],
-                  ),
                 );
               },
             ),
         ],
       ),
-      body: cartItems.isEmpty
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+      body:
+          cartItems.isEmpty
+              ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.shopping_cart_outlined,
+                      size: 80,
+                      color: Colors.grey.shade400,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      localizations.translate('empty_cart'),
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      localizations.translate('empty_cart_message'),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+              : Column(
                 children: [
-                  Icon(
-                    Icons.shopping_cart_outlined,
-                    size: 80,
-                    color: Colors.grey.shade400,
+                  Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: cartItems.length,
+                      itemBuilder: (ctx, index) {
+                        return CartItemCard(
+                          cartItem: cartItems[index],
+                          onIncrement: () {
+                            cartProvider.increaseQuantity(
+                              cartItems[index].productId,
+                            );
+                          },
+                          onDecrement: () {
+                            cartProvider.decreaseQuantity(
+                              cartItems[index].productId,
+                            );
+                          },
+                          onRemove: () {
+                            cartProvider.removeItem(cartItems[index].productId);
+                          },
+                        );
+                      },
+                    ),
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    localizations.translate('empty_cart'),
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    localizations.translate('empty_cart_message'),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey.shade600,
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, -5),
                         ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              localizations.translate('total'),
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            Text(
+                              '${cartProvider.totalAmount.toStringAsFixed(2)} ${localizations.translate('currency')}',
+                              style: Theme.of(
+                                context,
+                              ).textTheme.titleLarge?.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const CheckoutScreen(),
+                                ),
+                              );
+                            },
+                            child: Text(localizations.translate('checkout')),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            )
-          : Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: cartItems.length,
-                    itemBuilder: (ctx, index) {
-                      return CartItemCard(
-                        cartItem: cartItems[index],
-                        onIncrement: () {
-                          cartProvider.increaseQuantity(cartItems[index].productId);
-                        },
-                        onDecrement: () {
-                          cartProvider.decreaseQuantity(cartItems[index].productId);
-                        },
-                        onRemove: () {
-                          cartProvider.removeItem(cartItems[index].productId);
-                        },
-                      );
-                    },
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
-                        blurRadius: 10,
-                        offset: const Offset(0, -5),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            localizations.translate('total'),
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          Text(
-                            '${cartProvider.totalAmount.toStringAsFixed(2)} ${localizations.isArabic ? 'ريال' : 'SAR'}',
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const CheckoutScreen(),
-                              ),
-                            );
-                          },
-                          child: Text(localizations.translate('checkout')),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
     );
   }
 }
