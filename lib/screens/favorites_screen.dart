@@ -24,90 +24,86 @@ class FavoritesScreen extends StatelessWidget {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (ctx) => AlertDialog(
-                    title: Text(localizations.translate('clear')),
-                    content: Text(localizations.translate('clear_favorites')),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(ctx).pop(),
-                        child: Text(localizations.translate('cancel')),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          favoritesProvider.clearFavorites();
-                          Navigator.of(ctx).pop();
-                        },
-                        child: Text(
-                          localizations.translate('clear'),
-                          style: const TextStyle(color: Colors.red),
+                  builder:
+                      (ctx) => AlertDialog(
+                        title: Text(localizations.translate('clear')),
+                        content: Text(
+                          localizations.translate('clear_favorites_approval'),
                         ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(ctx).pop(),
+                            child: Text(localizations.translate('cancel')),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              favoritesProvider.clearFavorites();
+                              Navigator.of(ctx).pop();
+                            },
+                            child: Text(
+                              localizations.translate('clear'),
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
                 );
               },
             ),
         ],
       ),
-      body: favoriteItems.isEmpty
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.favorite_border,
-                    size: 80,
-                    color: Colors.grey.shade400,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    localizations.translate('empty_favorites'),
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    localizations.translate('empty_favorites_message'),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey.shade600,
+      body:
+          favoriteItems.isEmpty
+              ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.favorite_border,
+                      size: 80,
+                      color: Colors.grey.shade400,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      localizations.translate('empty_favorites'),
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      localizations.translate('empty_favorites_message'),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+              : LayoutBuilder(
+                builder: (context, constraints) {
+                  return GridView.builder(
+                    padding: const EdgeInsets.all(14),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.67,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
                         ),
-                  ),
-                ],
+                    itemCount: favoriteItems.length,
+                    itemBuilder: (ctx, index) {
+                      final favoriteItem = favoriteItems[index];
+                      final productProvider = Provider.of<ProductProvider>(
+                        context,
+                        listen: false,
+                      );
+                      final product = productProvider.findById(favoriteItem.id);
+
+                      return ProductGridItem(product: product);
+                    },
+                  );
+                },
               ),
-            )
-          : GridView.builder(
-              padding: const EdgeInsets.all(16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.7,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-              ),
-              itemCount: favoriteItems.length,
-              itemBuilder: (ctx, index) {
-                // Convert FavoriteItem to Product
-                final favoriteItem = favoriteItems[index];
-                final product = Product(
-                  id: favoriteItem.id,
-                  name: favoriteItem.name,
-                  description: favoriteItem.description ?? '',
-                  descriptionAr: favoriteItem.description ?? '',
-                  price: favoriteItem.price,
-                  imageUrl: favoriteItem.imageUrl,
-                  category: '',
-                  brand: '',
-                  images: [favoriteItem.imageUrl],
-                  specifications: {},
-                  specificationsAr: {},
-                  createdAt: DateTime.now(),
-                  rating: 0,
-                  reviewCount: 0,
-                  inStock: true,
-                );
-                
-                return ProductGridItem(product: product);
-              },
-            ),
     );
   }
 }

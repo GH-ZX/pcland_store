@@ -6,7 +6,7 @@ import 'package:pcland_store/widgets/product_grid_item.dart';
 class ProductListScreen extends StatelessWidget {
   final String title;
   final String? category;
-  final String? brand; 
+  final String? brand;
   final List<Product>? products;
 
   const ProductListScreen({
@@ -30,17 +30,21 @@ class ProductListScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.7,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-        ),
-        itemCount: displayProducts.length,
-        itemBuilder: (context, index) {
-          return ProductGridItem(product: displayProducts[index]);
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return GridView.builder(
+            padding: const EdgeInsets.all(10),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: constraints.maxWidth > 600 ? 0.8 : 0.7,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+            ),
+            itemCount: displayProducts.length,
+            itemBuilder: (context, index) {
+              return ProductGridItem(product: displayProducts[index]);
+            },
+          );
         },
       ),
     );

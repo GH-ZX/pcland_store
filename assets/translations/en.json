@@ -10,6 +10,9 @@
   "categories": "Categories",
   "cart": "Cart",
   "favorites": "Favorites",
+  "clear_favorites": "Would you like to clear your favorites?",
+  "clear_cart": "Would you like to clear your cart?",
+
   "profile": "Profile",
   "laptops": "Laptops",
   "accessories": "Accessories",
@@ -81,6 +84,7 @@
   "continue_shopping": "Continue Shopping",
   "empty_cart": "Your cart is empty",
   "empty_cart_message": "Add items to your cart to see them here.(lol)",
+  "empty_cart_approval": "Would you like to clear your cart?",
   "empty_favorites": "No products in favorites",
   "empty_favorites_message": "Add items to your favorites to see them here.",
   "no_results": "No results found",

@@ -27,7 +27,7 @@ class CartScreen extends StatelessWidget {
                   builder:
                       (ctx) => AlertDialog(
                         title: Text(localizations.translate('clear')),
-                        content: Text(localizations.translate('empty_cart')),
+                        content: Text(localizations.translate('empty_cart_approval')),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.of(ctx).pop(),

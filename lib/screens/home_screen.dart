@@ -266,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             scrollDirection: Axis.horizontal,
                             children: [
                               CategoryCard(
-                                title: 'All Brands',
+                                title: localizations.translate('All Brands'),
                                 icon: Icons.laptop_rounded,
                                 color:
                                     Theme.of(context).brightness ==
