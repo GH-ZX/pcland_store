@@ -2,6 +2,7 @@
   "app_name": "PC Land",
   "Soon": "Coming Soon",
   "have_account": "Do you have an account?",
+  "sign_in_failed": "Sign in failed",
   "home": "Home",
   "en": "English",
   "english": "English",
@@ -40,6 +41,12 @@
   "total": "Total",
   "checkout": "Checkout",
   "payment_method": "Payment Method",
+  "card_number": "Card Number",
+  "expiry_date": "Expiry Date",
+  "cvv": "CVV",
+  "required_field": "Required Field",
+  "invalid_email": "Invalid Email",
+  "password_short": "Password too short",
   "order_summary": "Order Summary",
   "order_history": "Order History",
   "settings": "Settings",
@@ -94,6 +101,7 @@
   "sign_in_with_google": "Sign in With Google",
   "google_login_failed": "Google login failed",
   "login_failed": "Login failed",
+  
   "or": "OR",
   "no_account": "Don't have an account?",
   "change_language": "Change Language",
@@ -110,5 +118,6 @@
   "logout_confirm": "Are you sure you want to logout?",
   "yes": "Yes",
   "made" : "Made by",
-  "by" : "Ahmad Ghawi and Abd-Alghani Al-Omar"
+  "by" : "Ahmad Ghawi and Abd-Alghani Al-Omar",
+  "currency": "TL"
 }

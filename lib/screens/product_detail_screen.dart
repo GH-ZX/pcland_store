@@ -226,7 +226,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                         Row(
                           children: [
                             Text(
-                              '${widget.product.price.toStringAsFixed(2)} ${localizations.isArabic ? 'ريال' : 'SAR'}',
+                              '${widget.product.price.toStringAsFixed(2)} ${localizations.translate('currency')}',
                               style: Theme.of(
                                 context,
                               ).textTheme.titleLarge?.copyWith(
@@ -237,7 +237,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen>
                             const SizedBox(width: 8),
                             if (widget.product.hasDiscount)
                               Text(
-                                '${widget.product.oldPrice!.toStringAsFixed(2)} ${localizations.isArabic ? 'ريال' : 'SAR'}',
+                                '${widget.product.oldPrice!.toStringAsFixed(2)} ${localizations.translate('currency')}',
                                 style: Theme.of(
                                   context,
                                 ).textTheme.bodyMedium?.copyWith(

@@ -66,9 +66,7 @@ class UserProvider with ChangeNotifier {
   String? _error;
   final String _userKey = 'user_data';
   final String _usersKey = 'registered_users';
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: ['email', 'profile'],
-  );
+  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email', 'profile']);
 
   User? get user => _user;
   bool get isLoading => _isLoading;
@@ -79,7 +77,7 @@ class UserProvider with ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       final userData = prefs.getString(_userKey);
-      
+
       if (userData != null) {
         final userMap = jsonDecode(userData) as Map<String, dynamic>;
         _user = User.fromJson(userMap);
@@ -95,28 +93,24 @@ class UserProvider with ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       final usersJson = prefs.getString(_usersKey);
-      
+
       List<Map<String, dynamic>> users = [];
       if (usersJson != null) {
         users = List<Map<String, dynamic>>.from(jsonDecode(usersJson));
       }
-      
+
       // التحقق من عدم وجود مستخدم بنفس البريد الإلكتروني
-      final existingUserIndex = users.indexWhere((u) => u['email'] == user.email);
+      final existingUserIndex = users.indexWhere(
+        (u) => u['email'] == user.email,
+      );
       if (existingUserIndex != -1) {
         // تحديث بيانات المستخدم الموجود
-        users[existingUserIndex] = {
-          ...user.toJson(),
-          'password': password,
-        };
+        users[existingUserIndex] = {...user.toJson(), 'password': password};
       } else {
         // إضافة مستخدم جديد
-        users.add({
-          ...user.toJson(),
-          'password': password,
-        });
+        users.add({...user.toJson(), 'password': password});
       }
-      
+
       await prefs.setString(_usersKey, jsonEncode(users));
       // طباعة قائمة المستخدمين للتأكد من حفظ البيانات بشكل صحيح
       print('Registered users: ${users.length}');
@@ -132,22 +126,22 @@ class UserProvider with ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       final usersJson = prefs.getString(_usersKey);
-      
+
       if (usersJson == null) {
         return null;
       }
-      
+
       final users = List<Map<String, dynamic>>.from(jsonDecode(usersJson));
       final userIndex = users.indexWhere(
-        (u) => u['email'] == email && u['password'] == password
+        (u) => u['email'] == email && u['password'] == password,
       );
-      
+
       if (userIndex != -1) {
         final userData = Map<String, dynamic>.from(users[userIndex]);
         userData.remove('password'); // إزالة كلمة المرور من البيانات المُرجعة
         return User.fromJson(userData);
       }
-      
+
       return null;
     } catch (e) {
       print('Error verifying credentials: $e');
@@ -171,11 +165,11 @@ class UserProvider with ChangeNotifier {
       // Check if user already exists
       final prefs = await SharedPreferences.getInstance();
       final usersJson = prefs.getString(_usersKey);
-      
+
       if (usersJson != null) {
         final users = List<Map<String, dynamic>>.from(jsonDecode(usersJson));
         final existingUserIndex = users.indexWhere((u) => u['email'] == email);
-        
+
         if (existingUserIndex != -1) {
           // User exists, verify password
           if (users[existingUserIndex]['password'] != password) {
@@ -184,7 +178,7 @@ class UserProvider with ChangeNotifier {
             notifyListeners();
             return false;
           }
-          
+
           // Load existing user data
           final userData = Map<String, dynamic>.from(users[existingUserIndex]);
           userData.remove('password');
@@ -199,7 +193,7 @@ class UserProvider with ChangeNotifier {
             profileImage: profileImage ?? 'Icons.person',
             address: address,
           );
-          
+
           // Add to registered users
           await _addUserToRegisteredUsers(_user!, password);
         }
@@ -213,19 +207,19 @@ class UserProvider with ChangeNotifier {
           profileImage: profileImage ?? 'Icons.person',
           address: address,
         );
-        
+
         // Add to registered users
         await _addUserToRegisteredUsers(_user!, password);
       }
-      
+
       // Save current user session
       await prefs.setString(_userKey, jsonEncode(_user!.toJson()));
-      
+
       _isLoading = false;
       notifyListeners();
       return true;
     } catch (e) {
-      _error = 'حدث خطأ أثناء تسجيل الدخول';
+      _error = 'error occurred during login';
       print('Login error: $e');
       _isLoading = false;
       notifyListeners();
@@ -241,53 +235,56 @@ class UserProvider with ChangeNotifier {
     try {
       // تسجيل الخروج أولاً لضمان عدم وجود جلسة سابقة
       await _googleSignIn.signOut();
-      
+
       // محاولة تسجيل الدخول باستخدام Google
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      
+
       if (googleUser == null) {
         // المستخدم ألغى عملية تسجيل الدخول
-        _error = 'تم إلغاء تسجيل الدخول';
+        _error = 'error occurred during Google sign-in';
         _isLoading = false;
         notifyListeners();
         return false;
       }
 
       print('Google Sign-In successful for: ${googleUser.email}');
-      
+
       // التحقق ما إذا كان المستخدم مسجل بالفعل
       final prefs = await SharedPreferences.getInstance();
       final usersJson = prefs.getString(_usersKey);
-      
+
       if (usersJson != null) {
         final users = List<Map<String, dynamic>>.from(jsonDecode(usersJson));
-        final existingUserIndex = users.indexWhere((u) => u['email'] == googleUser.email);
-        
+        final existingUserIndex = users.indexWhere(
+          (u) => u['email'] == googleUser.email,
+        );
+
         // إذا كان المستخدم مسجل بالفعل، قم بتسجيل الدخول باستخدام بياناته المخزنة
         if (existingUserIndex != -1) {
           print('Found existing Google user');
           final userData = Map<String, dynamic>.from(users[existingUserIndex]);
           userData.remove('password'); // إزالة كلمة المرور من البيانات المُرجعة
           _user = User.fromJson(userData);
-          
+
           // تحديث بيانات المستخدم من Google إذا تغيرت
-          if (_user!.name != googleUser.displayName && googleUser.displayName != null) {
+          if (_user!.name != googleUser.displayName &&
+              googleUser.displayName != null) {
             _user = _user!.copyWith(name: googleUser.displayName);
-            
+
             // تحديث بيانات المستخدم في قائمة المستخدمين المسجلين
             users[existingUserIndex]['name'] = googleUser.displayName;
             await prefs.setString(_usersKey, jsonEncode(users));
           }
-          
+
           // حفظ بيانات المستخدم في التخزين المحلي
           await prefs.setString(_userKey, jsonEncode(_user!.toJson()));
-          
+
           _isLoading = false;
           notifyListeners();
           return true;
         }
       }
-      
+
       print('Creating new Google user account');
       // إنشاء حساب جديد للمستخدم من بيانات Google
       _user = User(
@@ -298,15 +295,15 @@ class UserProvider with ChangeNotifier {
         profileImage: googleUser.photoUrl ?? 'https://via.placeholder.com/150',
         address: '',
       );
-      
+
       // حفظ بيانات المستخدم في التخزين المحلي
       await prefs.setString(_userKey, jsonEncode(_user!.toJson()));
-      
+
       // إضافة المستخدم إلى قائمة المستخدمين المسجلين مع كلمة مرور عشوائية
       // (لن يستخدمها المستخدم لأنه يسجل الدخول عبر Google)
       final randomPassword = DateTime.now().millisecondsSinceEpoch.toString();
       await _addUserToRegisteredUsers(_user!, randomPassword);
-      
+
       _isLoading = false;
       notifyListeners();
       return true;
@@ -327,19 +324,19 @@ class UserProvider with ChangeNotifier {
     try {
       // التحقق من صحة بيانات تسجيل الدخول
       final user = await _verifyCredentials(email, password);
-      
+
       if (user != null) {
         _user = user;
-        
+
         // حفظ بيانات المستخدم في التخزين المحلي
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString(_userKey, jsonEncode(_user!.toJson()));
-        
+
         _isLoading = false;
         notifyListeners();
         return true;
       }
-      
+
       // حالة خاصة للمستخدم الافتراضي ahmad@example.com
       if (email == 'ahmad@example.com' && password == '123') {
         return await loginWithCredentials(
@@ -348,8 +345,8 @@ class UserProvider with ChangeNotifier {
           phoneNumber: '+966500000000',
         );
       }
-      
-      _error = 'بيانات الدخول غير صحيحة';
+
+      _error = 'sign_in_failed';
       _isLoading = false;
       notifyListeners();
       return false;
@@ -361,7 +358,12 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> register(String name, String email, String password, String phoneNumber) async {
+  Future<bool> register(
+    String name,
+    String email,
+    String password,
+    String phoneNumber,
+  ) async {
     _isLoading = true;
     _error = null;
     notifyListeners();
@@ -369,22 +371,22 @@ class UserProvider with ChangeNotifier {
     try {
       // محاكاة تسجيل - في التطبيق الحقيقي، سيكون هذا استدعاء API
       await Future.delayed(const Duration(seconds: 1));
-      
+
       // محاكاة نجاح تسجيل
       _user = User(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         name: name,
         email: email,
-        phoneNumber: phoneNumber,  // تأكد من استخدام phoneNumber هنا
+        phoneNumber: phoneNumber, // تأكد من استخدام phoneNumber هنا
       );
-      
+
       // حفظ بيانات المستخدم في التخزين المحلي
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(_userKey, jsonEncode(_user!.toJson()));
-      
+
       // إضافة المستخدم إلى قائمة المستخدمين المسجلين
       await _addUserToRegisteredUsers(_user!, password);
-      
+
       _isLoading = false;
       notifyListeners();
       return true;
@@ -398,14 +400,14 @@ class UserProvider with ChangeNotifier {
 
   Future<void> logout() async {
     _user = null;
-    
+
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove(_userKey);
     } catch (e) {
       print('Error during logout: $e');
     }
-    
+
     notifyListeners();
   }
 
@@ -416,13 +418,13 @@ class UserProvider with ChangeNotifier {
     try {
       // محاكاة تحديث - في التطبيق الحقيقي، سيكون هذا استدعاء API
       await Future.delayed(const Duration(seconds: 1));
-      
+
       _user = updatedUser;
-      
+
       // حفظ بيانات المستخدم المحدثة في التخزين المحلي
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString(_userKey, jsonEncode(_user!.toJson()));
-      
+
       _isLoading = false;
       notifyListeners();
     } catch (e) {
