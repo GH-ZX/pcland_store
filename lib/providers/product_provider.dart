@@ -156,10 +156,10 @@ class ProductProvider with ChangeNotifier {
           price: 4599.99,
           oldPrice: 4999.99,
           imageUrl:
-              'https://www.hp.com/ca-en/shop/Html/Merch/Images/c08744317_1750x1285.jpg',
+              'https://m.media-amazon.com/images/I/81ZvaBihNsL.__AC_SY300_SX300_QL70_FMwebp_.jpg',
           images: [
-            'https://www.hp.com/ca-en/shop/Html/Merch/Images/c08744530_1750x1285.jpg',
-            'https://www.hp.com/ca-en/shop/Html/Merch/Images/c08744390_1750x1285.jpg',
+            'https://m.media-amazon.com/images/I/81BmB0Mx2rL._AC_SX466_.jpg',
+            'https://m.media-amazon.com/images/I/71PUZ9o9U6L._AC_SX466_.jpg',
           ],
           description:
               'HP Spectre x360 convertible laptop with touchscreen, excellent performance, and elegant design.',
@@ -196,10 +196,10 @@ class ProductProvider with ChangeNotifier {
           category: 'laptops',
           price: 5299.99,
           imageUrl:
-              'https://p3-ofp.static.pub//fes/cms/2024/07/05/umcrxcnsm2br1itju6gvundeb9s6tf364734.png',
+              'https://m.media-amazon.com/images/I/61XXyxsfdRL.__AC_SY300_SX300_QL70_FMwebp_.jpg',
           images: [
-            'https://p3-ofp.static.pub//fes/cms/2024/07/05/3euk5fn03von01bjlreh1bmgmzp3kf055467.png',
-            'https://p1-ofp.static.pub//fes/cms/2024/08/27/yd5dqi756ec0vr9a09fhc5s90tx4l6387783.png',
+            'https://m.media-amazon.com/images/I/616lsDxAaCL._AC_SX466_.jpg',
+            ' https://m.media-amazon.com/images/I/61z0CIA8JKL._AC_SL1500_.jpg',
           ],
           description:
               'Lenovo ThinkPad X1 Carbon laptop ideal for business with advanced security and excellent performance.',
@@ -319,10 +319,10 @@ class ProductProvider with ChangeNotifier {
           price: 6799.99,
           oldPrice: 7299.99,
           imageUrl:
-              'https://microless.com/cdn/products/4a9046f67beff9ecc54d9dd6b4f25fa0-hi.jpg',
+              'https://m.media-amazon.com/images/I/71cWXOi88TL.__AC_SX300_SY300_QL70_FMwebp_.jpg',
           images: [
-            'https://microless.com/cdn/products/acf44e294d6547188f3c57a70bb8adc5-hi.jpg',
-            'https://microless.com/cdn/products/fd4a4d6f1ba030c7fa688c22cdc085dd-hi.jpg',
+            'https://m.media-amazon.com/images/I/81xnPxvo-rL._AC_SX466_.jpg',
+            'https://m.media-amazon.com/images/I/71j1xB7xqJL._AC_SX466_.jpg',
           ],
           description:
               'MSI Stealth 16 gaming laptop with powerful processor, advanced graphics, and effective cooling.',
