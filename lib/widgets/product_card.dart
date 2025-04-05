@@ -15,6 +15,7 @@ class ProductCard extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
     final favoritesProvider = Provider.of<FavoritesProvider>(context);
     final isFavorite = favoritesProvider.isFavorite(product.id);
+    final productProvider = Provider.of<ProductProvider>(context);
 
     return GestureDetector(
       onTap: () {
@@ -54,24 +55,9 @@ class ProductCard extends StatelessWidget {
                   child: SizedBox(
                     height: 112,
                     width: double.infinity,
-                    child: Image.network(
-                      product.imageUrl,
+                    child: Image.asset(
+                      productProvider.getImagePath(product.imageUrl),
                       fit: BoxFit.contain,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value:
-                                loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                    : null,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                        );
-                      },
                       errorBuilder: (context, error, stackTrace) {
                         return Center(
                           child: Icon(

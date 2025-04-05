@@ -63,7 +63,6 @@ class _SearchScreenState extends State<SearchScreen> with SingleTickerProviderSt
       _isSearching = false;
     });
     
-    // Iniciar animación cuando se completa la búsqueda
     _animationController.reset();
     _animationController.forward();
   }

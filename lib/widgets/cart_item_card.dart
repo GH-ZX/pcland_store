@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/providers/cart_provider.dart';
+import 'package:pcland_store/providers/product_provider.dart';
 
 class CartItemCard extends StatelessWidget {
   final CartItem cartItem;
@@ -44,13 +46,15 @@ class CartItemCard extends StatelessWidget {
             child: SizedBox(
               width: 100,
               height: 100,
-              child: Image.network(
-                cartItem.imageUrl,
+              child: Image.asset(
+                Provider.of<ProductProvider>(
+                  context,
+                ).getImagePath(cartItem.imageUrl),
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          
+
           // Product Details
           Expanded(
             child: Padding(
@@ -80,9 +84,7 @@ class CartItemCard extends StatelessWidget {
                     children: [
                       Text(
                         '${localizations.translate('quantity')}: ',
-                        style: const TextStyle(
-                          fontSize: 14,
-                        ),
+                        style: const TextStyle(fontSize: 14),
                       ),
                       const Spacer(),
                       Container(
@@ -96,14 +98,13 @@ class CartItemCard extends StatelessWidget {
                               onTap: onDecrement,
                               child: Container(
                                 padding: const EdgeInsets.all(4),
-                                child: const Icon(
-                                  Icons.remove,
-                                  size: 16,
-                                ),
+                                child: const Icon(Icons.remove, size: 16),
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                              ),
                               child: Text(
                                 '${cartItem.quantity}',
                                 style: const TextStyle(
@@ -115,10 +116,7 @@ class CartItemCard extends StatelessWidget {
                               onTap: onIncrement,
                               child: Container(
                                 padding: const EdgeInsets.all(4),
-                                child: const Icon(
-                                  Icons.add,
-                                  size: 16,
-                                ),
+                                child: const Icon(Icons.add, size: 16),
                               ),
                             ),
                           ],

@@ -1,6 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pcland_store/providers/product_provider.dart';
 
 class CategoryCard extends StatelessWidget {
   final String title;
@@ -43,26 +45,18 @@ class CategoryCard extends StatelessWidget {
             if (imageUrl != null)
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  imageUrl!,
+                child: Image.asset(
+                  Provider.of<ProductProvider>(context).getImagePath(imageUrl!),
                   width: 60,
                   height: 60,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
-                    return Icon(
-                      icon,
-                      color: color,
-                      size: 32,
-                    );
+                    return Icon(icon, color: color, size: 32);
                   },
                 ),
               )
             else
-              Icon(
-                icon,
-                color: color,
-                size: 32,
-              ),
+              Icon(icon, color: color, size: 32),
             const SizedBox(height: 8),
             Text(
               title,

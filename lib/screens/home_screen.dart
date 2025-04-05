@@ -18,9 +18,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<String> bannerImages = [
-    'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4OXzi?ver=3a58',
-    'https://p3-ofp.static.pub/ShareResource/na/subseries/hero/lenovo-thinkpad-x1-carbon-with-badge-hero.png',
-    'https://www.apple.com/v/macbook-pro-14-and-16/b/images/overview/hero/intro__ewz1ro7xs14y_large.jpg',
+    'https://www.wavesad.com/wp-content/uploads/2024/08/Banner-Laptop-7.jpg',
+    'https://i.ytimg.com/vi/hNmad8MzBl8/maxresdefault.jpg',
+    'https://5.imimg.com/data5/SELLER/Default/2024/11/465860979/VE/SZ/VR/3116103/apple-macbook-pro-mneh3jn-a-new-model.jpg',
     'https://i.ytimg.com/vi/6vrIIfy7Mfg/maxresdefault.jpg',
     'https://www.amd.com/content/dam/amd/en/images/products/laptops/2201103-amd-advantage-laptop-rog-zephyrus-g14-video-thumbnail.png',
   ];
@@ -28,22 +28,21 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Map<String, dynamic>> bannerData = [
     {
       'image':
-          'https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4OXzi?ver=3a58',
+          'https://www.wavesad.com/wp-content/uploads/2024/08/Banner-Laptop-7.jpg',
       'title': 'Surface Laptop',
       'subtitle': 'Elegant and powerful',
       'color': Colors.blue.shade700,
       'shadow': Colors.black.withOpacity(0.3),
     },
     {
-      'image':
-          'https://p3-ofp.static.pub/ShareResource/na/subseries/hero/lenovo-thinkpad-x1-carbon-with-badge-hero.png',
-      'title': 'Lenovo ThinkPad X1',
-      'subtitle': 'Best for business and productivity',
+      'image': 'https://i.ytimg.com/vi/hNmad8MzBl8/maxresdefault.jpg',
+      'title': 'Lenovo Legion Pro 7i',
+      'subtitle': 'Best for Gaming and productivity',
       'color': Colors.red.shade800,
     },
     {
       'image':
-          'https://www.apple.com/v/macbook-pro-14-and-16/b/images/overview/hero/intro__ewz1ro7xs14y_large.jpg',
+          'https://5.imimg.com/data5/SELLER/Default/2024/11/465860979/VE/SZ/VR/3116103/apple-macbook-pro-mneh3jn-a-new-model.jpg',
       'title': 'MacBook Pro',
       'subtitle': 'Incredible performance',
       'color': Colors.grey.shade900,
@@ -268,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               CategoryCard(
                                 title: 'All Brands',
-                                icon: Icons.laptop_mac,
+                                icon: Icons.laptop_rounded,
                                 color:
                                     Theme.of(context).brightness ==
                                             Brightness.light
@@ -296,8 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Brightness.light
                                         ? Colors.blue.shade800
                                         : Colors.blue.shade300,
-                                imageUrl:
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Dell_Logo.svg/300px-Dell_Logo.svg.png',
+                                imageUrl: 'laptops/dell/dell.png',
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -319,8 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Brightness.light
                                         ? Colors.deepPurple.shade600
                                         : Colors.deepPurple.shade300,
-                                imageUrl:
-                                    'https://cdn.freebiesupply.com/logos/large/2x/asus-6630-logo-png-transparent.png',
+                                imageUrl: 'laptops/asus/asus.png',
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -342,8 +339,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Brightness.light
                                         ? Colors.red.shade900
                                         : Colors.red.shade300,
-                                imageUrl:
-                                    'https://static.cdnlogo.com/logos/m/21/msi.png',
+                                imageUrl: 'laptops/msi/msi.png',
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -365,8 +361,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Brightness.light
                                         ? Colors.grey.shade600
                                         : Colors.grey.shade300,
-                                imageUrl:
-                                    'https://cdn.freebiesupply.com/images/large/2x/apple-logo-transparent.png',
+                                imageUrl: 'laptops/apple/apple.png',
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -388,8 +383,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Brightness.light
                                         ? Colors.orange.shade900
                                         : Colors.orange.shade100,
-                                imageUrl:
-                                    'https://pngimg.com/uploads/microsoft/microsoft_PNG5.png',
+                                imageUrl: 'laptops/microsoft/microsoft.png',
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -411,8 +405,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Brightness.light
                                         ? Colors.grey.shade800
                                         : Colors.grey.shade400,
-                                imageUrl:
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Alienware_logo.svg/1200px-Alienware_logo.svg.png',
+                                imageUrl: 'laptops/alienware/alienware.png',
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -434,8 +427,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Brightness.light
                                         ? Colors.green.shade700
                                         : Colors.green.shade300,
-                                imageUrl:
-                                    'https://www.acer.com/content/dam/acer/global-asset-library/logos/acer-share-logo.png',
+                                imageUrl: 'laptops/acer/acer.png',
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -457,8 +449,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Brightness.light
                                         ? Colors.red.shade700
                                         : Colors.red.shade300,
-                                imageUrl:
-                                    'https://www.lenovo.com/medias/lenovo-logo-footer.png?context=bWFzdGVyfHJvb3R8NDA0MXxpbWFnZS9wbmd8aDY5L2g2NS85NDQ5NTM2MDk0MjM4LnBuZ3w0YjUxMWQ5ZTc1MDJkYTQ3ODI0YmZhZTJkMjYyMzJiYjY5ZGYxM2ZhNTU5ZTRiYmM0ZjE3NzJjNGQ5ZTRjYzU1',
+                                imageUrl: 'laptops/lenovo/lenovo.png',
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -480,8 +471,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             Brightness.light
                                         ? Colors.blue.shade700
                                         : Colors.blue.shade300,
-                                imageUrl:
-                                    'https://cdn.freebiesupply.com/logos/large/2x/samsung-1-logo-png-transparent.png',
+                                imageUrl: 'laptops/samsung/samsung.png',
                                 onTap: () {
                                   Navigator.push(
                                     context,

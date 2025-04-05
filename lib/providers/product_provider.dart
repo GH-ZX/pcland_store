@@ -44,7 +44,7 @@ class Product {
       category: json['category'],
       price: json['price'].toDouble(),
       oldPrice: json['old_price']?.toDouble(),
-      imageUrl: json['image_url'].map((path) => path).toList(),
+      imageUrl: json['image_url'],
       images: List<String>.from(json['images']).map((path) => path).toList(),
       description: json['description'],
       descriptionAr: json['description_ar'],
@@ -114,10 +114,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop', // تحديث
           price: 4999.99,
           oldPrice: 5499.99,
-          imageUrl: 'assets/images/laptops/dell/xps_15_main.png',
+          imageUrl: 'laptops/dell/xps_15_main.png',
           images: [
-            'assets/images/laptops/dell/xps_15_side.png',
-            'assets/images/laptops/dell/xps_15_back.png',
+            'laptops/dell/xps_15_side.png',
+            'laptops/dell/xps_15_back.png',
           ],
           description:
               'Dell XPS 15 laptop with 12th Gen Intel Core i7 processor, high-resolution display, and long-lasting battery.',
@@ -154,10 +154,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop', // تحديث
           price: 4599.99,
           oldPrice: 4999.99,
-          imageUrl: 'assets/images/laptops/hp/spectre_x360_main.png',
+          imageUrl: 'laptops/hp/spectre_x360_main.png',
           images: [
-            'assets/images/laptops/hp/spectre_x360_side.png',
-            'assets/images/laptops/hp/spectre_x360_back.png',
+            'laptops/hp/spectre_x360_side.png',
+            'laptops/hp/spectre_x360_back.png',
           ],
           description:
               'HP Spectre x360 convertible laptop with touchscreen, excellent performance, and elegant design.',
@@ -193,10 +193,10 @@ class ProductProvider with ChangeNotifier {
           name: 'Lenovo ThinkPad X1 Carbon',
           category: 'Laptop',
           price: 5299.99,
-          imageUrl: 'assets/images/laptops/lenovo/thinkpad_x1_carbon_main.png',
+          imageUrl: 'laptops/lenovo/thinkpad_x1_carbon_main.png',
           images: [
-            'assets/images/laptops/lenovo/thinkpad_x1_carbon_side.png',
-            'assets/images/laptops/lenovo/thinkpad_x1_carbon_back.png',
+            'laptops/lenovo/thinkpad_x1_carbon_side.png',
+            'laptops/lenovo/thinkpad_x1_carbon_back.png',
           ],
           description:
               'Lenovo ThinkPad X1 Carbon laptop ideal for business with advanced security and excellent performance.',
@@ -233,10 +233,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop', // تحديث
           price: 7999.99,
           oldPrice: 8499.99,
-          imageUrl: 'assets/images/laptops/samsung/book3_ultra_main.png',
+          imageUrl: 'laptops/samsung/book3_ultra_main.png',
           images: [
-            'assets/images/laptops/samsung/book3_ultra_side.png',
-            'assets/images/laptops/samsung/book3_ultra_back.png',
+            'laptops/samsung/book3_ultra_side.png',
+            'laptops/samsung/book3_ultra_back.png',
           ],
           description:
               'Samsung Galaxy Book3 Ultra laptop with powerful performance, stunning AMOLED display, and sleek design.',
@@ -273,10 +273,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 8999.99,
           oldPrice: 9499.99,
-          imageUrl: 'assets/images/laptops/apple/macbook_pro_16_main.png',
+          imageUrl: 'laptops/apple/macbook_pro_16_main.png',
           images: [
-            'assets/images/laptops/apple/macbook_pro_16_side.png',
-            'assets/images/laptops/apple/macbook_pro_16_back.png',
+            'laptops/apple/macbook_pro_16_side.png',
+            'laptops/apple/macbook_pro_16_back.png',
           ],
           description:
               'MacBook Pro 16 laptop with M2 Pro chip, Liquid Retina XDR display, and exceptional performance.',
@@ -313,10 +313,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 6799.99,
           oldPrice: 7299.99,
-          imageUrl: 'assets/images/laptops/msi/stealth_16_main.png',
+          imageUrl: 'laptops/msi/stealth_16_main.png',
           images: [
-            'assets/images/laptops/msi/stealth_16_side.png',
-            'assets/images/laptops/msi/stealth_16_back.png',
+            'laptops/msi/stealth_16_side.png',
+            'laptops/msi/stealth_16_back.png',
           ],
           description:
               'MSI Stealth 16 gaming laptop with powerful processor, advanced graphics, and effective cooling.',
@@ -353,10 +353,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 3999.99,
           oldPrice: 4499.99,
-          imageUrl: 'assets/images/laptops/asus/zenbook_14_main.png',
+          imageUrl: 'laptops/asus/zenbook_14_main.png',
           images: [
-            'assets/images/laptops/asus/zenbook_14_side.png',
-            'assets/images/laptops/asus/zenbook_14_back.png',
+            'laptops/asus/zenbook_14_side.png',
+            'laptops/asus/zenbook_14_back.png',
           ],
           description:
               'ASUS ZenBook 14 OLED laptop with vibrant OLED display, compact design, and powerful performance.',
@@ -393,10 +393,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 5999.99,
           oldPrice: 6499.99,
-          imageUrl: 'assets/images/laptops/asus/rog_zephyrus_g14_main.png',
+          imageUrl: 'laptops/asus/rog_zephyrus_g14_main.png',
           images: [
-            'assets/images/laptops/asus/rog_zephyrus_g14_side.png',
-            'assets/images/laptops/asus/rog_zephyrus_g14_back.png',
+            'laptops/asus/rog_zephyrus_g14_side.png',
+            'laptops/asus/rog_zephyrus_g14_back.png',
           ],
           description:
               'ASUS ROG Zephyrus G14 gaming laptop with powerful performance in a lightweight design.',
@@ -433,10 +433,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 6499.99,
           oldPrice: 6999.99,
-          imageUrl: 'assets/images/laptops/acer/predator_helios_300_main.png',
+          imageUrl: 'laptops/acer/predator_helios_300_main.png',
           images: [
-            'assets/images/laptops/acer/predator_helios_300_side.png',
-            'assets/images/laptops/acer/predator_helios_300_back.png',
+            'laptops/acer/predator_helios_300_side.png',
+            'laptops/acer/predator_helios_300_back.png',
           ],
           description:
               'Acer Predator Helios 300 gaming laptop with powerful Intel Core i7 processor, NVIDIA GeForce RTX 3060, and a high-refresh-rate display.',
@@ -473,11 +473,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 7299.99,
           oldPrice: 7799.99,
-          imageUrl:
-              'assets/images/laptops/microsoft/surface_laptop_studio_main.png',
+          imageUrl: 'laptops/microsoft/surface_laptop_studio_main.png',
           images: [
-            'assets/images/laptops/microsoft/surface_laptop_studio_side.png',
-            'assets/images/laptops/microsoft/surface_laptop_studio_back.png',
+            'laptops/microsoft/surface_laptop_studio_side.png',
+            'laptops/microsoft/surface_laptop_studio_back.png',
           ],
           description:
               'Microsoft Surface Laptop Studio with innovative design, powerful performance, and versatile functionality.',
@@ -514,10 +513,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 4799.99,
           oldPrice: 5299.99,
-          imageUrl: 'assets/images/laptops/microsoft/surface_laptop_5_main.png',
+          imageUrl: 'laptops/microsoft/surface_laptop_5_main.png',
           images: [
-            'assets/images/laptops/microsoft/surface_laptop_5_side.png',
-            'assets/images/laptops/microsoft/surface_laptop_5_back.png',
+            'laptops/microsoft/surface_laptop_5_side.png',
+            'laptops/microsoft/surface_laptop_5_back.png',
           ],
           description:
               'Microsoft Surface Laptop 5 with sleek design, powerful performance, and long-lasting battery.',
@@ -554,10 +553,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 8999.99,
           oldPrice: 9499.99,
-          imageUrl: 'assets/images/laptops/alienware/x17_r2_main.png',
+          imageUrl: 'laptops/alienware/x17_r2_main.png',
           images: [
-            'assets/images/laptops/alienware/x17_r2_side.png',
-            'assets/images/laptops/alienware/x17_r2_back.png',
+            'laptops/alienware/x17_r2_side.png',
+            'laptops/alienware/x17_r2_back.png',
           ],
           description:
               'Alienware x17 R2 gaming laptop with advanced features, powerful performance, and advanced cooling system.',
@@ -594,10 +593,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 7299.99,
           oldPrice: 7899.99,
-          imageUrl: 'assets/images/laptops/lenovo/legion_pro_7i_main.png',
+          imageUrl: 'laptops/lenovo/legion_pro_7i_main.png',
           images: [
-            'assets/images/laptops/lenovo/legion_pro_7i_side.png',
-            'assets/images/laptops/lenovo/legion_pro_7i_back.png',
+            'laptops/lenovo/legion_pro_7i_side.png',
+            'laptops/lenovo/legion_pro_7i_back.png',
           ],
           description:
               'Lenovo Legion Pro 7i gaming laptop with exceptional performance and advanced cooling system.',
@@ -634,10 +633,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 4999.99,
           oldPrice: 5299.99,
-          imageUrl: 'assets/images/laptops/lenovo/yoga_9i_main.png',
+          imageUrl: 'laptops/lenovo/yoga_9i_main.png',
           images: [
-            'assets/images/laptops/lenovo/yoga_9i_side.png',
-            'assets/images/laptops/lenovo/yoga_9i_back.png',
+            'laptops/lenovo/yoga_9i_side.png',
+            'laptops/lenovo/yoga_9i_back.png',
           ],
           description:
               'Lenovo Yoga 9i convertible laptop with premium design and stunning OLED display.',
@@ -674,10 +673,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 9499.99,
           oldPrice: 9999.99,
-          imageUrl: 'assets/images/laptops/dell/precision_7780_main.png',
+          imageUrl: 'laptops/dell/precision_7780_main.png',
           images: [
-            'assets/images/laptops/dell/precision_7780_side.png',
-            'assets/images/laptops/dell/precision_7780_back.png',
+            'laptops/dell/precision_7780_side.png',
+            'laptops/dell/precision_7780_back.png',
           ],
           description:
               'Dell Precision 7780 workstation laptop with professional-grade performance and reliability.',
@@ -714,11 +713,8 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 4299.99,
           oldPrice: 4699.99,
-          imageUrl: 'assets/images/laptops/dell/g15_main.png',
-          images: [
-            'assets/images/laptops/dell/g15_side.png',
-            'assets/images/laptops/dell/g15_back.png',
-          ],
+          imageUrl: 'laptops/dell/g15_main.png',
+          images: ['laptops/dell/g15_side.png', 'laptops/dell/g15_back.png'],
           description:
               'Dell G15 Gaming laptop offering great gaming performance at an affordable price.',
           descriptionAr:
@@ -754,10 +750,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 5999.99,
           oldPrice: 6499.99,
-          imageUrl: 'assets/images/laptops/hp/omen_16_main.png',
+          imageUrl: 'laptops/hp/omen_16_main.png',
           images: [
-            'assets/images/laptops/hp/omen_16_side.png',
-            'assets/images/laptops/hp/omen_16_back.png',
+            'laptops/hp/omen_16_side.png',
+            'laptops/hp/omen_16_back.png',
           ],
           description:
               'HP Omen 16 gaming laptop with powerful performance and advanced cooling system.',
@@ -794,10 +790,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 5499.99,
           oldPrice: 5999.99,
-          imageUrl: 'assets/images/laptops/hp/elite_dragonfly_g3_main.png',
+          imageUrl: 'laptops/hp/elite_dragonfly_g3_main.png',
           images: [
-            'assets/images/laptops/hp/elite_dragonfly_g3_side.png',
-            'assets/images/laptops/hp/elite_dragonfly_g3_back.png',
+            'laptops/hp/elite_dragonfly_g3_side.png',
+            'laptops/hp/elite_dragonfly_g3_back.png',
           ],
           description:
               'HP Elite Dragonfly G3 business laptop with premium design and enterprise security features.',
@@ -834,10 +830,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 4999.99,
           oldPrice: 5299.99,
-          imageUrl: 'assets/images/laptops/apple/macbook_air_m2_main.png',
+          imageUrl: 'laptops/apple/macbook_air_m2_main.png',
           images: [
-            'assets/images/laptops/apple/macbook_air_m2_side.png',
-            'assets/images/laptops/apple/macbook_air_m2_back.png',
+            'laptops/apple/macbook_air_m2_side.png',
+            'laptops/apple/macbook_air_m2_back.png',
           ],
           description:
               'MacBook Air with M2 chip, featuring all-day battery life and stunning Liquid Retina display.',
@@ -874,10 +870,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 7499.99,
           oldPrice: 7999.99,
-          imageUrl: 'assets/images/laptops/apple/macbook_pro_14_main.png',
+          imageUrl: 'laptops/apple/macbook_pro_14_main.png',
           images: [
-            'assets/images/laptops/apple/macbook_pro_14_side.png',
-            'assets/images/laptops/apple/macbook_pro_14_back.png',
+            'laptops/apple/macbook_pro_14_side.png',
+            'laptops/apple/macbook_pro_14_back.png',
           ],
           description:
               'MacBook Pro 14 with M2 Max chip, delivering extraordinary performance and battery life.',
@@ -914,10 +910,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 5999.99,
           oldPrice: 6499.99,
-          imageUrl: 'assets/images/laptops/msi/gl75_leopard_main.png',
+          imageUrl: 'laptops/msi/gl75_leopard_main.png',
           images: [
-            'assets/images/laptops/msi/gl75_leopard_side.png',
-            'assets/images/laptops/msi/gl75_leopard_back.png',
+            'laptops/msi/gl75_leopard_side.png',
+            'laptops/msi/gl75_leopard_back.png',
           ],
           description:
               'MSI GL75 Leopard gaming laptop with powerful performance and high-refresh-rate display.',
@@ -954,10 +950,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 5999.99,
           oldPrice: 6499.99,
-          imageUrl: 'assets/images/laptops/samsung/book3_pro_main.png',
+          imageUrl: 'laptops/samsung/book3_pro_main.png',
           images: [
-            'assets/images/laptops/samsung/book3_pro_side.png',
-            'assets/images/laptops/samsung/book3_pro_back.png',
+            'laptops/samsung/book3_pro_side.png',
+            'laptops/samsung/book3_pro_back.png',
           ],
           description:
               'Samsung Galaxy Book3 Pro with Dynamic AMOLED display and powerful Intel processor.',
@@ -994,10 +990,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 4999.99,
           oldPrice: 5499.99,
-          imageUrl: 'assets/images/laptops/samsung/book3_360_main.png',
+          imageUrl: 'laptops/samsung/book3_360_main.png',
           images: [
-            'assets/images/laptops/samsung/book3_360_side.png',
-            'assets/images/laptops/samsung/book3_360_back.png',
+            'laptops/samsung/book3_360_side.png',
+            'laptops/samsung/book3_360_back.png',
           ],
           description:
               'Samsung Galaxy Book3 360 convertible laptop with S Pen support and versatile design.',
@@ -1034,10 +1030,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 4299.99,
           oldPrice: 4799.99,
-          imageUrl: 'assets/images/laptops/acer/nitro_5_main.png',
+          imageUrl: 'laptops/acer/nitro_5_main.png',
           images: [
-            'assets/images/laptops/acer/nitro_5_side.png',
-            'assets/images/laptops/acer/nitro_5_back.png',
+            'laptops/acer/nitro_5_side.png',
+            'laptops/acer/nitro_5_back.png',
           ],
           description:
               'Acer Nitro 5 gaming laptop with powerful performance and advanced cooling.',
@@ -1073,10 +1069,10 @@ class ProductProvider with ChangeNotifier {
           category: 'Laptop',
           price: 9999.99,
           oldPrice: 10499.99,
-          imageUrl: 'assets/images/laptops/alienware/m18_main.png',
+          imageUrl: 'laptops/alienware/m18_main.png',
           images: [
-            'assets/images/laptops/alienware/m18_side.png',
-            'assets/images/laptops/alienware/m18_back.png',
+            'laptops/alienware/m18_side.png',
+            'laptops/alienware/m18_back.png',
           ],
           description:
               'Alienware m18 gaming laptop with ultimate performance and immersive 18-inch display.',

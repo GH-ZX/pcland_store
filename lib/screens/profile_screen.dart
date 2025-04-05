@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _saveProfile() {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    
+
     // Update user information
     userProvider.updateUserProfile(
       userProvider.user!.copyWith(
@@ -54,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         email: _emailController.text,
         phoneNumber: _phoneController.text,
         address: _addressController.text,
-      )
+      ),
     );
 
     setState(() {
@@ -63,7 +63,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(AppLocalizations.of(context).translate('profile_updated')),
+        content: Text(
+          AppLocalizations.of(context).translate('profile_updated'),
+        ),
         backgroundColor: Colors.green,
       ),
     );
@@ -73,21 +75,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     final userProvider = Provider.of<UserProvider>(context);
-    
+
     if (!userProvider.isLoggedIn) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(localizations.translate('profile')),
-        ),
+        appBar: AppBar(title: Text(localizations.translate('profile'))),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.account_circle,
-                size: 80,
-                color: Colors.grey.shade400,
-              ),
+              Icon(Icons.account_circle, size: 80, color: Colors.grey.shade400),
               const SizedBox(height: 16),
               Text(
                 localizations.translate('login_required'),
@@ -215,48 +211,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: isEditing
-            ? TextField(
-                controller: controller,
-                decoration: InputDecoration(
-                  labelText: label,
-                  prefixIcon: Icon(icon),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                keyboardType: keyboardType,
-                maxLines: maxLines,
-              )
-            : Row(
-                children: [
-                  Icon(icon, color: Theme.of(context).colorScheme.primary),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          label,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey.shade600,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          controller.text.isEmpty
-                              ? '---'
-                              : controller.text,
-                          style: const TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
+        child:
+            isEditing
+                ? TextField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    labelText: label,
+                    prefixIcon: Icon(icon),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                ],
-              ),
+                  keyboardType: keyboardType,
+                  maxLines: maxLines,
+                )
+                : Row(
+                  children: [
+                    Icon(icon, color: Theme.of(context).colorScheme.primary),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            label,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            controller.text.isEmpty ? '---' : controller.text,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
       ),
     );
   }

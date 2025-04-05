@@ -53,7 +53,12 @@ class ProductGridItem extends StatelessWidget {
                   child: SizedBox(
                     height: 120,
                     width: double.infinity,
-                    child: Image.network(product.imageUrl, fit: BoxFit.contain),
+                    child: Image.asset(
+                      Provider.of<ProductProvider>(
+                        context,
+                      ).getImagePath(product.imageUrl),
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
                 Positioned(
