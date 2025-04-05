@@ -2,14 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// تعريف الكلاس الرئيسي للترجمة
 class AppLocalizations {
   final Locale locale;
   Map<String, String> _localizedStrings = {};
 
   AppLocalizations(this.locale);
 
-  // دالة مساعدة للوصول إلى الترجمات في أي مكان في التطبيق
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }

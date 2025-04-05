@@ -1,6 +1,6 @@
 {
   "app_name": "بي سي لاند",
-  "welcome": "قريباً",
+  "Soon": "قريباً",
   "have_account": "هل لديك حساب؟",
   "en": "الإنجليزية",
   "english": "الإنجليزية",
@@ -118,5 +118,32 @@
   "yes": "نعم",
   "no": "لا",
   "account settings": "إعدادات الحساب",
-  "support and about": "الدعم والمساعدة"
+  "support and about": "الدعم والمساعدة",
+  "change_password": "تغيير كلمة المرور",
+  "current_password": "كلمة المرور الحالية",
+  "new_password": "كلمة المرور الجديدة",
+  "confirm_new_password": "تأكيد كلمة المرور الجديدة",
+  "password_changed": "تم تغيير كلمة المرور بنجاح",
+  "password_change_failed": "فشل تغيير كلمة المرور",
+  "password_mismatch": "كلمات المرور غير متطابقة",
+  "password_too_short": "كلمة المرور قصيرة جداً",
+  "password_required": "كلمة المرور مطلوبة",
+  "email_required": "البريد الإلكتروني مطلوب",
+  "email_invalid": "البريد الإلكتروني غير صالح",
+  "phone_required": "رقم الهاتف مطلوب",
+  "phone_invalid": "رقم الهاتف غير صالح",
+  "address_required": "العنوان مطلوب",
+  "address_invalid": "العنوان غير صالح",
+  "name_required": "الاسم مطلوب",
+  "name_invalid": "الاسم غير صالح",
+  "login_success": "تم تسجيل الدخول بنجاح",
+  "register_success": "تم إنشاء الحساب بنجاح",
+  "register_failed": "فشل إنشاء الحساب",
+  "close": "إغلاق",
+  "made" : "تم التصميم بواسطة:",
+  "by" : "أحمد غاوي وعبد الغني العُمَر"
+
+  
+
+
 }

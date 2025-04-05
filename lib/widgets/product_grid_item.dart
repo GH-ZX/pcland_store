@@ -51,12 +51,9 @@ class ProductGridItem extends StatelessWidget {
                     topRight: Radius.circular(12),
                   ),
                   child: SizedBox(
-                    height: 150,
+                    height: 120,
                     width: double.infinity,
-                    child: Image.network(
-                      product.imageUrl,
-                      fit: BoxFit.contain,
-                    ),
+                    child: Image.network(product.imageUrl, fit: BoxFit.contain),
                   ),
                 ),
                 Positioned(
@@ -98,7 +95,10 @@ class ProductGridItem extends StatelessWidget {
                     top: 8,
                     left: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(4),
@@ -115,7 +115,7 @@ class ProductGridItem extends StatelessWidget {
                   ),
               ],
             ),
-            
+
             // Product Info
             Expanded(
               child: Padding(
@@ -144,7 +144,7 @@ class ProductGridItem extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '${product.price.toStringAsFixed(2)} ${localizations.isArabic ? 'ريال' : 'SAR'}',
+                          '${product.price.toStringAsFixed(2)} ${localizations.isArabic ? 'ل ت' : 'TL'}',
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.bold,
@@ -165,11 +165,7 @@ class ProductGridItem extends StatelessWidget {
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        const Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                          size: 16,
-                        ),
+                        const Icon(Icons.star, color: Colors.amber, size: 16),
                         const SizedBox(width: 4),
                         Text(
                           product.rating.toString(),
@@ -189,24 +185,25 @@ class ProductGridItem extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: product.inStock
-                            ? () {
-                                cartProvider.addItem(
-                                  productId: product.id,
-                                  name: product.name,
-                                  price: product.price,
-                                  imageUrl: product.imageUrl,
-                                );
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      '${product.name} ${localizations.translate('add_to_cart')}',
+                        onPressed:
+                            product.inStock
+                                ? () {
+                                  cartProvider.addItem(
+                                    productId: product.id,
+                                    name: product.name,
+                                    price: product.price,
+                                    imageUrl: product.imageUrl,
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        '${product.name} ${localizations.translate('add_to_cart')}',
+                                      ),
+                                      duration: const Duration(seconds: 2),
                                     ),
-                                    duration: const Duration(seconds: 2),
-                                  ),
-                                );
-                              }
-                            : null,
+                                  );
+                                }
+                                : null,
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           minimumSize: const Size(double.infinity, 30),

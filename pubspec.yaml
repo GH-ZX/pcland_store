@@ -76,6 +76,17 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/laptops/
+    - assets/images/laptops/acer/
+    - assets/images/laptops/alienware/
+    - assets/images/laptops/apple/
+    - assets/images/laptops/asus/
+    - assets/images/laptops/dell/
+    - assets/images/laptops/hp/
+    - assets/images/laptops/lenovo/
+    - assets/images/laptops/microsoft/
+    - assets/images/laptops/msi/
+    - assets/images/laptops/samsung/
     - assets/icons/
     - assets/translations/
 

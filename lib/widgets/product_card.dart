@@ -26,8 +26,9 @@ class ProductCard extends StatelessWidget {
         );
       },
       child: Container(
-        width: 180,
-        margin: const EdgeInsets.only(right: 16),
+        height: 300,
+        width: 200,
+        margin: const EdgeInsets.only(right: 14),
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(12),
@@ -51,7 +52,7 @@ class ProductCard extends StatelessWidget {
                     topRight: Radius.circular(12),
                   ),
                   child: SizedBox(
-                    height: 130,
+                    height: 112,
                     width: double.infinity,
                     child: Image.network(
                       product.imageUrl,
@@ -60,10 +61,11 @@ class ProductCard extends StatelessWidget {
                         if (loadingProgress == null) return child;
                         return Center(
                           child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                : null,
+                            value:
+                                loadingProgress.expectedTotalBytes != null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes!
+                                    : null,
                             valueColor: AlwaysStoppedAnimation<Color>(
                               Theme.of(context).colorScheme.primary,
                             ),
@@ -121,7 +123,10 @@ class ProductCard extends StatelessWidget {
                     top: 8,
                     left: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(4),
@@ -138,7 +143,7 @@ class ProductCard extends StatelessWidget {
                   ),
               ],
             ),
-            
+
             // Product Info
             Padding(
               padding: const EdgeInsets.all(12),
@@ -187,11 +192,7 @@ class ProductCard extends StatelessWidget {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 16,
-                      ),
+                      Icon(Icons.star, color: Colors.amber, size: 16),
                       const SizedBox(width: 4),
                       Text(
                         product.rating.toString(),

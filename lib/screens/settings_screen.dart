@@ -10,7 +10,6 @@ import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +20,7 @@ class SettingsScreen extends StatelessWidget {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.translate('settings')),        
-      ),
+      appBar: AppBar(title: Text(localizations.translate('settings'))),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -40,25 +37,29 @@ class SettingsScreen extends StatelessWidget {
                   leading: CircleAvatar(
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     radius: 25,
-                    backgroundImage: userProvider.user!.profileImage != null
-                        ? NetworkImage(userProvider.user!.profileImage!)
-                        : null,
-                    child: userProvider.user!.profileImage == null
-                        ? Text(
-                            userProvider.user!.name.substring(0, 1).toUpperCase(),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          )
-                        : null,
+                    backgroundImage:
+                        userProvider.user!.profileImage != null
+                            ? NetworkImage(userProvider.user!.profileImage!)
+                            : null,
+                    child:
+                        userProvider.user!.profileImage == null
+                            ? Text(
+                              userProvider.user!.name
+                                  .substring(0, 1)
+                                  .toUpperCase(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            )
+                            : null,
                   ),
                   title: Text(
                     userProvider.user!.name,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: 20,
                     ),
                   ),
                   subtitle: Column(
@@ -70,17 +71,7 @@ class SettingsScreen extends StatelessWidget {
                       Text(userProvider.user!.phoneNumber),
                     ],
                   ),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ProfileScreen(),
-                        ),
-                      );
-                    },
-                  ),
+
                   isThreeLine: true,
                 ),
               ),
@@ -89,7 +80,10 @@ class SettingsScreen extends StatelessWidget {
 
           // Account Settings Section
           if (userProvider.isLoggedIn)
-            _buildSectionHeader(context, localizations.translate('account settings')),
+            _buildSectionHeader(
+              context,
+              localizations.translate('account settings'),
+            ),
           if (userProvider.isLoggedIn)
             Card(
               elevation: 2,
@@ -140,8 +134,6 @@ class SettingsScreen extends StatelessWidget {
                     leading: const Icon(Icons.notifications_outlined),
                     title: Text(localizations.translate('inbox')),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                    
-                  
                   ),
                 ],
               ),
@@ -156,51 +148,61 @@ class SettingsScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
-                children: [
+              children: [
                 // Theme Settings
                 InkWell(
                   onTap: () {
-                  _showThemeSelectionDialog(context, themeProvider, localizations);
+                    _showThemeSelectionDialog(
+                      context,
+                      themeProvider,
+                      localizations,
+                    );
                   },
                   child: ListTile(
-                  leading: Icon(
-                    isDarkMode ? Icons.dark_mode : Icons.light_mode,
-                  ),
-                  title: Text(localizations.translate('theme')),
-                  trailing: Text(
-                    localizations.translate(
-                    themeProvider.themeMode == ThemeMode.system
-                      ? 'system'
-                      : themeProvider.themeMode == ThemeMode.light
-                        ? 'light'
-                        : 'dark'
+                    leading: Icon(
+                      isDarkMode ? Icons.dark_mode : Icons.light_mode,
                     ),
-                  ),
+                    title: Text(localizations.translate('theme')),
+                    trailing: Text(
+                      localizations.translate(
+                        themeProvider.themeMode == ThemeMode.system
+                            ? 'system'
+                            : themeProvider.themeMode == ThemeMode.light
+                            ? 'light'
+                            : 'dark',
+                      ),
+                    ),
                   ),
                 ),
                 const Divider(height: 1),
                 // Language Settings
                 InkWell(
                   onTap: () {
-                  _showLanguageSelectionDialog(context, languageProvider, localizations);
+                    _showLanguageSelectionDialog(
+                      context,
+                      languageProvider,
+                      localizations,
+                    );
                   },
                   child: ListTile(
-                  leading: const Icon(Icons.language),
-                  title: Text(localizations.translate('language')),
-                  trailing: Text(
-                    localizations.translate(languageProvider.currentLanguage)
-                  ),
+                    leading: const Icon(Icons.language),
+                    title: Text(localizations.translate('language')),
+                    trailing: Text(
+                      localizations.translate(languageProvider.currentLanguage),
+                    ),
                   ),
                 ),
                 const Divider(height: 1),
-                
-              ]
+              ],
             ),
           ),
           const SizedBox(height: 16),
 
           // Support & About Section
-          _buildSectionHeader(context, localizations.translate('support and about')),
+          _buildSectionHeader(
+            context,
+            localizations.translate('support and about'),
+          ),
           Card(
             elevation: 2,
             shape: RoundedRectangleBorder(
@@ -213,52 +215,64 @@ class SettingsScreen extends StatelessWidget {
                   onTap: () {
                     showDialog(
                       context: context,
-                      builder: (ctx) => AlertDialog(
-                        title: Text(localizations.translate('about')),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 60,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                                shape: BoxShape.circle,
+                      builder:
+                          (ctx) => AlertDialog(
+                            title: Text(localizations.translate('about')),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary.withOpacity(0.1),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.computer,
+                                    size: 30,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  'PCLand Store',
+                                  style: Theme.of(context).textTheme.titleLarge,
+                                ),
+                                const SizedBox(height: 4),
+                                Text('Version 1.0.0'),
+                                const SizedBox(height: 16),
+                                Text(
+                                  localizations.translate('about_description'),
+                                ),
+                                const SizedBox(height: 16),
+                                const Divider(),
+                                const SizedBox(height: 16),
+                                Text(
+                                  localizations.translate('special thanks'),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  localizations.translate(
+                                    'thanks to medaad and 1000 programmer initiative',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(ctx).pop(),
+                                child: Text(localizations.translate('close')),
                               ),
-                              child: Icon(
-                                Icons.computer,
-                                size: 30,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              'PCLand Store',
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                            const SizedBox(height: 4),
-                            Text('Version 1.0.0'),
-                            const SizedBox(height: 16),
-                            Text(localizations.translate('about_description')),
-                            const SizedBox(height: 16),
-                            const Divider(),
-                            const SizedBox(height: 16),
-                            Text(
-                              localizations.translate('special thanks'),
-                              style: const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(localizations.translate('thanks to medaad and 1000 programmer initiative')),
-                          ],
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(ctx).pop(),
-                            child: Text(localizations.translate('close')),
+                            ],
                           ),
-                        ],
-                      ),
                     );
                   },
                   child: ListTile(
@@ -274,11 +288,9 @@ class SettingsScreen extends StatelessWidget {
                     final Uri emailLaunchUri = Uri(
                       scheme: 'mailto',
                       path: 'pc_land_support@gmail.com',
-                      queryParameters: {
-                        'subject': 'PCLand Store Support',
-                      },
+                      queryParameters: {'subject': 'PCLand Store Support'},
                     );
-                    
+
                     if (await url_launcher.canLaunchUrl(emailLaunchUri)) {
                       await url_launcher.launchUrl(emailLaunchUri);
                     }
@@ -297,9 +309,10 @@ class SettingsScreen extends StatelessWidget {
           // Login/Logout Section
           Card(
             elevation: 2,
-            color: userProvider.isLoggedIn 
-                ? Colors.red.withOpacity(0.1)
-                : Theme.of(context).colorScheme.primary.withOpacity(0.1),
+            color:
+                userProvider.isLoggedIn
+                    ? Colors.red.withOpacity(0.1)
+                    : Theme.of(context).colorScheme.primary.withOpacity(0.1),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -308,33 +321,36 @@ class SettingsScreen extends StatelessWidget {
                 if (userProvider.isLoggedIn) {
                   showDialog(
                     context: context,
-                    builder: (ctx) => AlertDialog(
-                      title: Text(localizations.translate('logout')),
-                      content: Text(localizations.translate('logout_confirm')),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.of(ctx).pop(),
-                          child: Text(localizations.translate('cancel')),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            userProvider.logout();
-                            Navigator.of(ctx).pop();
-                            // Navigate to login screen
-                            Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
-                              ),
-                              (route) => false,
-                            );
-                          },
-                          child: Text(
-                            localizations.translate('logout'),
-                            style: const TextStyle(color: Colors.red),
+                    builder:
+                        (ctx) => AlertDialog(
+                          title: Text(localizations.translate('logout')),
+                          content: Text(
+                            localizations.translate('logout_confirm'),
                           ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(ctx).pop(),
+                              child: Text(localizations.translate('cancel')),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                userProvider.logout();
+                                Navigator.of(ctx).pop();
+                                // Navigate to login screen
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginScreen(),
+                                  ),
+                                  (route) => false,
+                                );
+                              },
+                              child: Text(
+                                localizations.translate('logout'),
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
                   );
                 } else {
                   Navigator.push(
@@ -345,40 +361,40 @@ class SettingsScreen extends StatelessWidget {
                   );
                 }
               },
-              child: userProvider.isLoggedIn
-                  ? ListTile(
-                      leading: const Icon(Icons.logout, color: Colors.red),
-                      title: Text(
-                        localizations.translate('logout'),
-                        style: const TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
+              child:
+                  userProvider.isLoggedIn
+                      ? ListTile(
+                        leading: const Icon(Icons.logout, color: Colors.red),
+                        title: Text(
+                          localizations.translate('logout'),
+                          style: const TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    )
-                  : ListTile(
-                      leading: Icon(
-                        Icons.login,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      title: Text(
-                        localizations.translate('login'),
-                        style: TextStyle(
+                      )
+                      : ListTile(
+                        leading: Icon(
+                          Icons.login,
                           color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold,
+                        ),
+                        title: Text(
+                          localizations.translate('login'),
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
             ),
           ),
           const SizedBox(height: 32),
-          
-          // App Version
+
           Center(
             child: Text(
-              '${localizations.translate('version')} 1.0.0',
+              '${localizations.translate('made')} ${localizations.translate('by')} ',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                 fontSize: 12,
               ),
             ),
@@ -403,80 +419,90 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  void _showThemeSelectionDialog(BuildContext context, ThemeProvider themeProvider, AppLocalizations localizations) {
+  void _showThemeSelectionDialog(
+    BuildContext context,
+    ThemeProvider themeProvider,
+    AppLocalizations localizations,
+  ) {
     showDialog(
       context: context,
-      builder: (ctx) => SimpleDialog(
-        title: Text(localizations.translate('select theme')),
-        children: [
-          RadioListTile<ThemeMode>(
-            title: Text(localizations.translate('system')),
-            value: ThemeMode.system,
-            groupValue: themeProvider.themeMode,
-            onChanged: (ThemeMode? value) {
-              if (value != null) {
-                themeProvider.setThemeMode(value);
-                Navigator.of(ctx).pop();
-              }
-            },
+      builder:
+          (ctx) => SimpleDialog(
+            title: Text(localizations.translate('select theme')),
+            children: [
+              RadioListTile<ThemeMode>(
+                title: Text(localizations.translate('system')),
+                value: ThemeMode.system,
+                groupValue: themeProvider.themeMode,
+                onChanged: (ThemeMode? value) {
+                  if (value != null) {
+                    themeProvider.setThemeMode(value);
+                    Navigator.of(ctx).pop();
+                  }
+                },
+              ),
+              RadioListTile<ThemeMode>(
+                title: Text(localizations.translate('light')),
+                value: ThemeMode.light,
+                groupValue: themeProvider.themeMode,
+                onChanged: (ThemeMode? value) {
+                  if (value != null) {
+                    themeProvider.setThemeMode(value);
+                    Navigator.of(ctx).pop();
+                  }
+                },
+              ),
+              RadioListTile<ThemeMode>(
+                title: Text(localizations.translate('dark')),
+                value: ThemeMode.dark,
+                groupValue: themeProvider.themeMode,
+                onChanged: (ThemeMode? value) {
+                  if (value != null) {
+                    themeProvider.setThemeMode(value);
+                    Navigator.of(ctx).pop();
+                  }
+                },
+              ),
+            ],
           ),
-          RadioListTile<ThemeMode>(
-            title: Text(localizations.translate('light')),
-            value: ThemeMode.light,
-            groupValue: themeProvider.themeMode,
-            onChanged: (ThemeMode? value) {
-              if (value != null) {
-                themeProvider.setThemeMode(value);
-                Navigator.of(ctx).pop();
-              }
-            },
-          ),
-          RadioListTile<ThemeMode>(
-            title: Text(localizations.translate('dark')),
-            value: ThemeMode.dark,
-            groupValue: themeProvider.themeMode,
-            onChanged: (ThemeMode? value) {
-              if (value != null) {
-                themeProvider.setThemeMode(value);
-                Navigator.of(ctx).pop();
-              }
-            },
-          ),
-        ],
-      ),
     );
   }
 
-  void _showLanguageSelectionDialog(BuildContext context, LanguageProvider languageProvider, AppLocalizations localizations) {
+  void _showLanguageSelectionDialog(
+    BuildContext context,
+    LanguageProvider languageProvider,
+    AppLocalizations localizations,
+  ) {
     showDialog(
       context: context,
-      builder: (ctx) => SimpleDialog(
-        title: Text(localizations.translate('select language')),
-        children: [
-          RadioListTile<String>(
-            title: Text(localizations.translate('en')),
-            value: 'en',
-            groupValue: languageProvider.currentLanguage,
-            onChanged: (String? value) {
-              if (value != null) {
-                languageProvider.setLanguage(value);
-                Navigator.of(ctx).pop();
-              }
-            },
+      builder:
+          (ctx) => SimpleDialog(
+            title: Text(localizations.translate('select language')),
+            children: [
+              RadioListTile<String>(
+                title: Text(localizations.translate('en')),
+                value: 'en',
+                groupValue: languageProvider.currentLanguage,
+                onChanged: (String? value) {
+                  if (value != null) {
+                    languageProvider.setLanguage(value);
+                    Navigator.of(ctx).pop();
+                  }
+                },
+              ),
+              RadioListTile<String>(
+                title: Text(localizations.translate('ar')),
+                value: 'ar',
+                groupValue: languageProvider.currentLanguage,
+                onChanged: (String? value) {
+                  if (value != null) {
+                    languageProvider.setLanguage(value);
+                    Navigator.of(ctx).pop();
+                  }
+                },
+              ),
+            ],
           ),
-          RadioListTile<String>(
-            title: Text(localizations.translate('ar')),
-            value: 'ar',
-            groupValue: languageProvider.currentLanguage,
-            onChanged: (String? value) {
-              if (value != null) {
-                languageProvider.setLanguage(value);
-                Navigator.of(ctx).pop();
-              }
-            },
-          ),
-        ],
-      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 {
   "app_name": "PC Land",
-  "welcome": "Coming Soon",
+  "Soon": "Coming Soon",
   "have_account": "Do you have an account?",
   "home": "Home",
   "en": "English",
@@ -105,8 +105,6 @@
   "Inbox": "Inbox",
   "logout_confirm": "Are you sure you want to logout?",
   "yes": "Yes",
-  "no": "No",
-  "shipping info": "Shipping Information",
-  "account settings": "Account Settings",
-  "support and about": "Support and About"
+  "made" : "Made by",
+  "by" : "Ahmad Ghawi and Abd-Alghani Al-Omar"
 }

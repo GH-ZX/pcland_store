@@ -45,8 +45,8 @@ class CategoryCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 child: Image.network(
                   imageUrl!,
-                  width: 40,
-                  height: 40,
+                  width: 60,
+                  height: 60,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     return Icon(
