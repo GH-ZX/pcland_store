@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pcland_store/screens/my_orders.dart';
 import 'package:provider/provider.dart';
 import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/providers/cart_provider.dart';
@@ -114,7 +115,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: details.onStepContinue,
+                      onPressed: () {
+                        if (_currentStep == 2) {
+                          _placeOrder();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const OrdersScreen(),
+                            ),
+                          );
+                        }
+                      },
                       child: Text(
                         _currentStep == 2
                             ? localizations.translate('place_order')

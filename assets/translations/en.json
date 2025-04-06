@@ -13,7 +13,6 @@
   "favorites": "Favorites",
   "clear_favorites": "Would you like to clear your favorites?",
   "clear_cart": "Would you like to clear your cart?",
-
   "profile": "Profile",
   "laptops": "Laptops",
   "accessories": "Accessories",
@@ -101,7 +100,6 @@
   "sign_in_with_google": "Sign in With Google",
   "google_login_failed": "Google login failed",
   "login_failed": "Login failed",
-  
   "or": "OR",
   "no_account": "Don't have an account?",
   "change_language": "Change Language",
@@ -117,7 +115,15 @@
   "Inbox": "Inbox",
   "logout_confirm": "Are you sure you want to logout?",
   "yes": "Yes",
-  "made" : "Made by",
-  "by" : "Ahmad Ghawi and Abd-Alghani Al-Omar",
-  "currency": "TL"
+  "made": "Made by",
+  "by": "Ahmad Ghawi and Abd-Alghani Al-Omar",
+  "currency": "TL",
+  "dont_have_account": "Don't have an account?",
+  "create_account": "Create an account",
+  "register_success": "Registration successful",
+  "PCLand Store": "PCLand Store",
+  "Version 1.0.0": "Version 1.0.0",
+  "about_description": "PC Land is a mobile application that provides a platform for users to browse, search, and purchase laptops and accessories. The app offers a user-friendly interface, allowing users to easily navigate through various categories, view product details, and make secure payments. With features like order tracking, favorites, and personalized recommendations, PC Land aims to enhance the online shopping experience for tech enthusiasts.",
+  "special thanks": "Special thanks to",
+  "special thanks decription": "Midad orgnaization and 1000 programmers for their support and guidance in the development of this application. Their expertise and resources have been invaluable in bringing this project to life."
 }

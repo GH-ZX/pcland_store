@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pcland_store/screens/address_screen.dart';
+import 'package:pcland_store/screens/my_orders.dart';
 import 'package:provider/provider.dart';
 import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/providers/theme_provider.dart';
@@ -110,7 +112,12 @@ class SettingsScreen extends StatelessWidget {
                   const Divider(height: 1),
                   InkWell(
                     onTap: () {
-                      // Navigate to orders screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const OrdersScreen(),
+                        ),
+                      );
                     },
                     child: ListTile(
                       leading: const Icon(Icons.shopping_bag_outlined),
@@ -121,7 +128,12 @@ class SettingsScreen extends StatelessWidget {
                   const Divider(height: 1),
                   InkWell(
                     onTap: () {
-                      // Navigate to addresses screen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddressScreen(),
+                        ),
+                      );
                     },
                     child: ListTile(
                       leading: const Icon(Icons.location_on_outlined),
@@ -261,7 +273,7 @@ class SettingsScreen extends StatelessWidget {
                                 const SizedBox(height: 8),
                                 Text(
                                   localizations.translate(
-                                    'thanks to medaad and 1000 programmer initiative',
+                                    'special thanks decription',
                                   ),
                                 ),
                               ],
@@ -285,14 +297,12 @@ class SettingsScreen extends StatelessWidget {
                 // Contact Us
                 InkWell(
                   onTap: () async {
-                    final Uri emailLaunchUri = Uri(
-                      scheme: 'mailto',
-                      path: 'pc_land_support@gmail.com',
-                      queryParameters: {'subject': 'PCLand Store Support'},
-                    );
+                    final phoneNumber =
+                        '0097693553256'; // Replace with your WhatsApp number
+                    final url = Uri.parse('https://wa.me/$phoneNumber');
 
-                    if (await url_launcher.canLaunchUrl(emailLaunchUri)) {
-                      await url_launcher.launchUrl(emailLaunchUri);
+                    if (await url_launcher.canLaunchUrl(url)) {
+                      await url_launcher.launchUrl(url);
                     }
                   },
                   child: ListTile(
