@@ -4,6 +4,7 @@ import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/providers/cart_provider.dart';
 import 'package:pcland_store/widgets/cart_item_card.dart';
 import 'package:pcland_store/screens/checkout_screen.dart';
+import 'package:pcland_store/screens/orders_screen.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -18,6 +19,18 @@ class CartScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(localizations.translate('cart')),
         actions: [
+          // زر عرض الطلبات
+          IconButton(
+            icon: const Icon(Icons.shopping_bag_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const OrdersScreen()),
+              );
+            },
+            tooltip: localizations.translate('my_orders'),
+          ),
+          // زر مسح السلة
           if (cartItems.isNotEmpty)
             IconButton(
               icon: const Icon(Icons.delete_outline),
@@ -27,7 +40,9 @@ class CartScreen extends StatelessWidget {
                   builder:
                       (ctx) => AlertDialog(
                         title: Text(localizations.translate('clear')),
-                        content: Text(localizations.translate('empty_cart_approval')),
+                        content: Text(
+                          localizations.translate('empty_cart_approval'),
+                        ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.of(ctx).pop(),

@@ -25,7 +25,7 @@ class SectionTitle extends StatelessWidget {
         if (onSeeAll != null)
           TextButton(
             onPressed: onSeeAll,
-            child: Text(localizations.isArabic ? 'عرض الكل' : 'See All'),
+            child: Text(localizations.translate('See All')),
           ),
       ],
     );

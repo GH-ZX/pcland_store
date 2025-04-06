@@ -30,41 +30,41 @@ class _HomeScreenState extends State<HomeScreen> {
       'image':
           'https://www.wavesad.com/wp-content/uploads/2024/08/Banner-Laptop-7.jpg',
       'title': 'Surface Laptop',
-      'subtitle': 'Elegant and powerful',
+      'subtitle_key': 'surface_subtitle',
       'color': Colors.blue.shade700,
       'shadow': Colors.black.withOpacity(0.3),
     },
     {
       'image': 'https://i.ytimg.com/vi/hNmad8MzBl8/maxresdefault.jpg',
       'title': 'Lenovo Legion Pro 7i',
-      'subtitle': 'Best for Gaming and productivity',
+      'subtitle_key': 'legion_subtitle',
       'color': Colors.red.shade800,
     },
     {
       'image':
           'https://5.imimg.com/data5/SELLER/Default/2024/11/465860979/VE/SZ/VR/3116103/apple-macbook-pro-mneh3jn-a-new-model.jpg',
       'title': 'MacBook Pro',
-      'subtitle': 'Incredible performance',
+      'subtitle_key': 'macbook_subtitle',
       'color': Colors.grey.shade900,
     },
     {
       'image': 'https://i.ytimg.com/vi/6vrIIfy7Mfg/maxresdefault.jpg',
       'title': 'MSI Stealth Gaming',
-      'subtitle': 'Professional gaming experience',
+      'subtitle_key': 'msi_subtitle',
       'color': Colors.purple.shade800,
     },
     {
       'image':
           'https://www.amd.com/content/dam/amd/en/images/products/laptops/2201103-amd-advantage-laptop-rog-zephyrus-g14-video-thumbnail.png',
       'title': 'ASUS ROG Zephyrus G14',
-      'subtitle': 'Most powerful gaming devices',
+      'subtitle_key': 'rog_subtitle',
       'color': const Color.fromARGB(255, 105, 18, 199),
     },
     {
       'image':
           'https://i.pcmag.com/imagery/reviews/01FIvTZt1sIxZydOira9RYm-5..v1680798175.jpg',
       'title': 'MSI Katana GF66',
-      'subtitle': 'Best for business and productivity',
+      'subtitle_key': 'katana_subtitle',
       'color': Colors.red.shade800,
     },
   ];
@@ -225,7 +225,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                               const SizedBox(height: 4),
                                               Text(
-                                                banner['subtitle'],
+                                                localizations.translate(
+                                                  banner['subtitle_key'],
+                                                ),
                                                 style: TextStyle(
                                                   fontSize: 16,
                                                   color: Colors.white,
@@ -271,8 +273,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color:
                                     Theme.of(context).brightness ==
                                             Brightness.light
-                                        ? Colors.grey.shade600
-                                        : Colors.black87,
+                                        ? Colors.grey.shade700
+                                        : const Color.fromARGB(
+                                          255,
+                                          199,
+                                          193,
+                                          193,
+                                        ),
 
                                 onTap: () {
                                   Navigator.push(
@@ -294,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Theme.of(context).brightness ==
                                             Brightness.light
                                         ? Colors.blue.shade800
-                                        : Colors.blue.shade300,
+                                        : Colors.blue.shade400,
                                 imageUrl: 'laptops/dell/dell.png',
                                 onTap: () {
                                   Navigator.push(
@@ -316,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Theme.of(context).brightness ==
                                             Brightness.light
                                         ? Colors.deepPurple.shade600
-                                        : Colors.deepPurple.shade300,
+                                        : Colors.purple.shade400,
                                 imageUrl: 'laptops/asus/asus.png',
                                 onTap: () {
                                   Navigator.push(
@@ -338,7 +345,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Theme.of(context).brightness ==
                                             Brightness.light
                                         ? Colors.red.shade900
-                                        : Colors.red.shade300,
+                                        : Colors.red.shade400,
                                 imageUrl: 'laptops/msi/msi.png',
                                 onTap: () {
                                   Navigator.push(
@@ -360,7 +367,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Theme.of(context).brightness ==
                                             Brightness.light
                                         ? Colors.grey.shade600
-                                        : Colors.grey.shade300,
+                                        : Colors.grey.shade400,
                                 imageUrl: 'laptops/apple/apple.png',
                                 onTap: () {
                                   Navigator.push(
@@ -382,7 +389,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Theme.of(context).brightness ==
                                             Brightness.light
                                         ? Colors.orange.shade900
-                                        : Colors.orange.shade100,
+                                        : Colors.orange.shade200,
                                 imageUrl: 'laptops/microsoft/microsoft.png',
                                 onTap: () {
                                   Navigator.push(
@@ -403,8 +410,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color:
                                     Theme.of(context).brightness ==
                                             Brightness.light
-                                        ? Colors.grey.shade800
-                                        : Colors.grey.shade400,
+                                        ? Colors.grey.shade700
+                                        : Colors.grey.shade300,
                                 imageUrl: 'laptops/alienware/alienware.png',
                                 onTap: () {
                                   Navigator.push(
@@ -448,7 +455,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Theme.of(context).brightness ==
                                             Brightness.light
                                         ? Colors.red.shade700
-                                        : Colors.red.shade300,
+                                        : Colors.red.shade400,
                                 imageUrl: 'laptops/lenovo/lenovo.png',
                                 onTap: () {
                                   Navigator.push(
@@ -470,7 +477,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Theme.of(context).brightness ==
                                             Brightness.light
                                         ? Colors.blue.shade700
-                                        : Colors.blue.shade300,
+                                        : Colors.blue.shade400,
                                 imageUrl: 'laptops/samsung/samsung.png',
                                 onTap: () {
                                   Navigator.push(

@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
+import '../services/app_localizations.dart';
 
 class AddressScreen extends StatelessWidget {
   const AddressScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // قائمة العناوين الثابتة (يمكن استبدالها ببيانات ديناميكية من Provider أو API)
+    final localizations = AppLocalizations.of(context);
+
     final List<Map<String, String>> addresses = [
-      {'title': 'Home', 'address': 'Syria - Idlib'},
-      {'title': 'Work', 'address': 'Syria - Aleppo - Azaz'},
+      {
+        'title': localizations.translate('home'),
+        'address': localizations.translate('syria_idlib'),
+      },
+      {
+        'title': localizations.translate('work'),
+        'address': localizations.translate('syria_aleppo_azaz'),
+      },
     ];
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Addresses'),
+        title: Text(localizations.translate('my_addresses')),
         centerTitle: true,
         elevation: 0,
       ),

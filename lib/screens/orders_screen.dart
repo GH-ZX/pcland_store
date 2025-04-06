@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pcland_store/providers/order_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:pcland_store/services/app_localizations.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
@@ -9,12 +10,13 @@ class OrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final orderProvider = Provider.of<OrderProvider>(context);
     final orders = orderProvider.orders;
+    final localizations = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('My Orders')),
+      appBar: AppBar(title: Text(localizations.translate('my_orders'))),
       body:
           orders.isEmpty
-              ? Center(child: Text('No orders yet.'))
+              ? Center(child: Text(localizations.translate('no_orders')))
               : ListView.builder(
                 itemCount: orders.length,
                 itemBuilder: (context, index) {
@@ -26,27 +28,55 @@ class OrdersScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // اسم المنتج
-                          Text(
-                            order.productName,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          // الكمية والسعر
+                          // إضافة صف يحتوي على الصورة واسم المنتج
                           Row(
                             children: [
-                              Text('Quantity: ${order.quantity}'),
+                              // صورة المنتج
+                              Container(
+                                width: 80,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: DecorationImage(
+                                    image: AssetImage(order.imageUrl),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
                               const SizedBox(width: 16),
-                              Text('\$${order.price.toStringAsFixed(2)}'),
+                              // تفاصيل المنتج
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      order.productName,
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '${localizations.translate('quantity_label')}: ${order.quantity}',
+                                        ),
+                                        const SizedBox(width: 16),
+                                        Text(
+                                          '${order.price.toStringAsFixed(2)} ${localizations.translate('currency')}',
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                           const SizedBox(height: 8),
-                          // تاريخ الطلب
+                          // باقي المحتوى كما هو
                           Text(
-                            'Ordered on: ${order.orderDate.day}/${order.orderDate.month}/${order.orderDate.year}',
+                            '${localizations.translate('ordered_on')}: ${order.orderDate.day}/${order.orderDate.month}/${order.orderDate.year}',
                             style: TextStyle(color: Colors.grey),
                           ),
                           const SizedBox(height: 8),
@@ -79,7 +109,7 @@ class OrdersScreen extends StatelessWidget {
                                   _showTrackingDialog(context, order);
                                 },
                                 icon: Icon(Icons.track_changes),
-                                label: Text('Track'),
+                                label: Text(localizations.translate('track')),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.green,
                                 ),
@@ -90,7 +120,9 @@ class OrdersScreen extends StatelessWidget {
                                   _cancelOrder(context, order.id);
                                 },
                                 icon: Icon(Icons.cancel),
-                                label: Text('Cancel'),
+                                label: Text(
+                                  localizations.translate('cancel_order'),
+                                ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.red,
                                 ),
@@ -122,18 +154,24 @@ class OrdersScreen extends StatelessWidget {
 
   // عرض نافذة تتبع الطلب
   void _showTrackingDialog(BuildContext context, Order order) {
+    final localizations = AppLocalizations.of(context);
     showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
-            title: Text('Track Order'),
+            title: Text(localizations.translate('track_order')),
             content: Text(
-              'Your order is currently ${order.status.toLowerCase()}.',
+              localizations
+                  .translate('track_order_status')
+                  .replaceAll(
+                    '{status}',
+                    localizations.translate(order.status.toLowerCase()),
+                  ),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Close'),
+                child: Text(localizations.translate('close')),
               ),
             ],
           ),
@@ -142,10 +180,39 @@ class OrdersScreen extends StatelessWidget {
 
   // إلغاء الطلب
   void _cancelOrder(BuildContext context, String orderId) {
+    final localizations = AppLocalizations.of(context);
     final orderProvider = Provider.of<OrderProvider>(context, listen: false);
-    orderProvider.removeOrder(orderId);
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text('Order canceled successfully.')));
+
+    showDialog(
+      context: context,
+      builder:
+          (ctx) => AlertDialog(
+            title: Text(localizations.translate('cancel_order')),
+            content: Text(
+              localizations.translate('cancel_order_confirmation'),
+            ), // أضف هذا النص للترجمات
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: Text(localizations.translate('back')),
+              ),
+              TextButton(
+                onPressed: () {
+                  orderProvider.removeOrder(orderId);
+                  Navigator.pop(ctx);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(localizations.translate('order_canceled')),
+                    ),
+                  );
+                },
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: Text(
+                  localizations.translate('confirm'),
+                ), 
+              ),
+            ],
+          ),
+    );
   }
 }

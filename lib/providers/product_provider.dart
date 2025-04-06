@@ -1129,13 +1129,13 @@ class ProductProvider with ChangeNotifier {
   List<Product> get newArrivals {
     final sortedProducts = [..._items];
     sortedProducts.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-    return sortedProducts.take(5).toList();
+    return sortedProducts.take(8).toList();
   }
 
   List<Product> get bestSellers {
     final sortedProducts = [..._items];
     sortedProducts.sort((a, b) => b.rating.compareTo(a.rating));
-    return sortedProducts.take(5).toList();
+    return sortedProducts.take(8).toList();
   }
 
   List<Product> get specialOffers {

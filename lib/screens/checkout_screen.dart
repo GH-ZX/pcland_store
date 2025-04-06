@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pcland_store/screens/my_orders_screen.dart';
+import 'package:pcland_store/screens/orders_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/providers/cart_provider.dart';
 import 'package:pcland_store/providers/user_provider.dart';
 import 'package:pcland_store/providers/product_provider.dart';
+import 'package:pcland_store/providers/order_provider.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
@@ -47,12 +48,32 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   void _placeOrder() {
     if (_formKey.currentState!.validate()) {
-      // Process the order
       final cartProvider = Provider.of<CartProvider>(context, listen: false);
+      final orderProvider = Provider.of<OrderProvider>(context, listen: false);
+      final productProvider = Provider.of<ProductProvider>(
+        context,
+        listen: false,
+      );
 
-      // Here you would normally send the order to your backend
-      // For now, we'll just show a success message and clear the cart
+      for (var item in cartProvider.items) {
+        // الحصول على مسار الصورة من ProductProvider
+        String imageUrl = productProvider.getImagePath(item.imageUrl);
 
+        final order = Order(
+          id:
+              '${DateTime.now().millisecondsSinceEpoch}_${item.productId}',
+          productName: item.name,
+          quantity: item.quantity,
+          price: item.price,
+          imageUrl: imageUrl, // استخدام مسار الصورة المعالج
+          orderDate: DateTime.now(),
+          status: 'Processing',
+        );
+
+        orderProvider.addOrder(order);
+      }
+
+      // عرض رسالة نجاح وتفريغ السلة
       showDialog(
         context: context,
         builder:
@@ -68,9 +89,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   onPressed: () {
                     cartProvider.clearCart();
                     Navigator.of(ctx).pop();
-                    Navigator.of(context).popUntil((route) => route.isFirst);
+                    // التوجيه إلى شاشة الطلبات بعد إتمام الطلب
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OrdersScreen(),
+                      ),
+                    );
                   },
-                  child: Text(AppLocalizations.of(context).translate('ok')),
+                  child: Text(AppLocalizations.of(context).translate('Go to your orders')),
                 ),
               ],
             ),
@@ -85,7 +112,21 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     final productProvider = Provider.of<ProductProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.translate('checkout'))),
+      appBar: AppBar(
+        title: Text(localizations.translate('checkout')),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_bag_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const OrdersScreen()),
+              );
+            },
+            tooltip: localizations.translate('my_orders'),
+          ),
+        ],
+      ),
       body: Form(
         key: _formKey,
         child: Stepper(
@@ -115,17 +156,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {
-                        if (_currentStep == 2) {
-                          _placeOrder();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const OrdersScreen(),
-                            ),
-                          );
-                        }
-                      },
+                      onPressed:
+                          _currentStep == 2
+                              ? _placeOrder
+                              : details.onStepContinue,
                       child: Text(
                         _currentStep == 2
                             ? localizations.translate('place_order')

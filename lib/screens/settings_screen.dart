@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pcland_store/screens/address_screen.dart';
-import 'package:pcland_store/screens/my_orders_screen.dart';
+import 'package:pcland_store/screens/orders_screen.dart';
+import 'package:pcland_store/screens/inbox_screen.dart'; // Add this import
 import 'package:provider/provider.dart';
 import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/providers/theme_provider.dart';
@@ -142,10 +143,20 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   const Divider(height: 1),
-                  ListTile(
-                    leading: const Icon(Icons.notifications_outlined),
-                    title: Text(localizations.translate('inbox')),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const InboxScreen(),
+                        ),
+                      );
+                    },
+                    child: ListTile(
+                      leading: const Icon(Icons.notifications_outlined),
+                      title: Text(localizations.translate('inbox')),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    ),
                   ),
                 ],
               ),
@@ -296,17 +307,84 @@ class SettingsScreen extends StatelessWidget {
                 const Divider(height: 1),
                 // Contact Us
                 InkWell(
-                  onTap: () async {
-                    final phoneNumber =
-                        '0097693553256'; // Replace with your WhatsApp number
-                    final url = Uri.parse('https://wa.me/$phoneNumber');
-
-                    if (await url_launcher.canLaunchUrl(url)) {
-                      await url_launcher.launchUrl(url);
-                    }
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder:
+                          (ctx) => AlertDialog(
+                            title: Text(localizations.translate('contact us')),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ListTile(
+                                  leading: const Icon(Icons.phone),
+                                  title: Text(
+                                    localizations.translate('Ahmed Ghawi'),
+                                  ),
+                                  subtitle: const Text('+352681142074'),
+                                  onTap: () async {
+                                    Navigator.pop(ctx);
+                                    final phoneNumber = '+352681142074';
+                                    final url = 'tel:$phoneNumber';
+                                    if (!await url_launcher.launchUrl(
+                                      Uri.parse(url),
+                                    )) {
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                              'Could not launch phone dialer',
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  },
+                                ),
+                                ListTile(
+                                  leading: const Icon(Icons.phone),
+                                  title: Text(
+                                    localizations.translate(
+                                      'Abd-AlGhani Al-Omar',
+                                    ),
+                                  ),
+                                  subtitle: const Text('+97693553256'),
+                                  onTap: () async {
+                                    Navigator.pop(ctx);
+                                    final phoneNumber = '+97693553256';
+                                    final url = 'tel:$phoneNumber';
+                                    if (!await url_launcher.launchUrl(
+                                      Uri.parse(url),
+                                    )) {
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(
+                                          context,
+                                        ).showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                              'Could not launch phone dialer',
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(ctx),
+                                child: Text(localizations.translate('close')),
+                              ),
+                            ],
+                          ),
+                    );
                   },
                   child: ListTile(
-                    leading: const Icon(Icons.mail_outline),
+                    leading: const Icon(Icons.contact_support_outlined),
                     title: Text(localizations.translate('contact us')),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                   ),

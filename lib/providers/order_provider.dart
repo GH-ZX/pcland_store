@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+
 class Order {
   final String id;
   final String productName;
   final int quantity;
   final double price;
   final DateTime orderDate;
+  final String imageUrl; // إضافة حقل الصورة
   String status; // حالة الطلب (قيد المعالجة، تم الشحن، تم التسليم)
 
   Order({
@@ -14,6 +16,7 @@ class Order {
     required this.quantity,
     required this.price,
     required this.orderDate,
+    required this.imageUrl, // إضافة الصورة كحقل مطلوب
     this.status = 'Processing', // القيمة الافتراضية هي "قيد المعالجة"
   });
 }
@@ -38,10 +41,8 @@ class OrderProvider with ChangeNotifier {
   // تحديث حالة الطلب
   void updateOrderStatus(String orderId, String newStatus) {
     final order = _orders.firstWhere((order) => order.id == orderId);
-    if (order != null) {
-      order.status = newStatus; // تحديث حالة الطلب
-      notifyListeners();
-    }
+    order.status = newStatus; // تحديث حالة الطلب
+    notifyListeners();
   }
 
   // حذف طلب
