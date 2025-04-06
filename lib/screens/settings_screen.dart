@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:pcland_store/screens/address_screen.dart';
 import 'package:pcland_store/screens/orders_screen.dart';
@@ -39,24 +41,12 @@ class SettingsScreen extends StatelessWidget {
                 child: ListTile(
                   leading: CircleAvatar(
                     backgroundColor: Theme.of(context).colorScheme.primary,
-                    radius: 25,
-                    backgroundImage:
-                        userProvider.user!.profileImage != null
-                            ? NetworkImage(userProvider.user!.profileImage!)
-                            : null,
-                    child:
-                        userProvider.user!.profileImage == null
-                            ? Text(
-                              userProvider.user!.name
-                                  .substring(0, 1)
-                                  .toUpperCase(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            )
-                            : null,
+                    radius: 30,
+                    child: const Icon(
+                      Icons.person,
+                      color: Colors.white,
+                      size: 45,
+                    ),
                   ),
                   title: Text(
                     userProvider.user!.name,
@@ -215,7 +205,6 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Divider(height: 1),
               ],
             ),
           ),
@@ -397,13 +386,19 @@ class SettingsScreen extends StatelessWidget {
           // Login/Logout Section
           Card(
             elevation: 2,
-            color:
-                userProvider.isLoggedIn
-                    ? Colors.red.withOpacity(0.1)
-                    : Theme.of(context).colorScheme.primary.withOpacity(0.1),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
+              side: BorderSide(
+                color:
+                    userProvider.isLoggedIn
+                        ? Colors.red.withOpacity(0.1)
+                        : Theme.of(
+                          context,
+                        ).colorScheme.primary.withOpacity(0.1),
+                width: 1,
+              ),
             ),
+
             child: InkWell(
               onTap: () {
                 if (userProvider.isLoggedIn) {

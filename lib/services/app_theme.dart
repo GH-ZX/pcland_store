@@ -158,7 +158,6 @@ class AppTheme {
       secondary: secondaryColor,
       error: errorColor,
       surface: darkSurfaceColor,
-      background: darkBackgroundColor,
       onSurface: darkTextColor,
     ),
     scaffoldBackgroundColor: darkBackgroundColor,

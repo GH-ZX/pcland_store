@@ -190,7 +190,7 @@ class OrdersScreen extends StatelessWidget {
             title: Text(localizations.translate('cancel_order')),
             content: Text(
               localizations.translate('cancel_order_confirmation'),
-            ), // أضف هذا النص للترجمات
+            ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx),

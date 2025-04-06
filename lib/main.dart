@@ -52,8 +52,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'PCLand Store',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme.copyWith(
+        splashFactory: InkRipple.splashFactory,
+      ),
+      darkTheme: AppTheme.darkTheme.copyWith(
+        splashFactory: InkRipple.splashFactory,
+      ),
       themeMode: themeProvider.themeMode,
       locale: Locale(languageProvider.currentLanguage),
       supportedLocales: const [Locale('en', ''), Locale('ar', '')],

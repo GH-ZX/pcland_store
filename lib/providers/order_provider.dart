@@ -22,7 +22,7 @@ class Order {
 }
 
 class OrderProvider with ChangeNotifier {
-  List<Order> _orders = [];
+  final List<Order> _orders = [];
 
   // الحصول على جميع الطلبات
   List<Order> get orders => [..._orders];

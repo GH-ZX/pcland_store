@@ -18,6 +18,7 @@ class InboxScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(localizations.translate('inbox')),
           bottom: TabBar(
+            labelColor: Colors.grey.shade200,
             tabs: [
               Tab(text: localizations.translate('updates')),
               Tab(text: localizations.translate('promotions')),
