@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pcland_store/screens/my_orders.dart';
+import 'package:pcland_store/screens/my_orders_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/providers/cart_provider.dart';

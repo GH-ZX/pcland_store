@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'; // Localizations
+import 'package:pcland_store/providers/order_provider.dart';
 import 'package:pcland_store/services/app_localizations.dart';
 import 'package:pcland_store/services/app_theme.dart';
 import 'package:provider/provider.dart'; // Providers }>
@@ -13,7 +14,6 @@ import 'package:pcland_store/screens/main_navigation.dart';
 import 'package:pcland_store/screens/login_screen.dart';
 
 void main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
 
   final themeProvider = ThemeProvider();
@@ -33,6 +33,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => FavoritesProvider()),
         ChangeNotifierProvider(create: (_) => ProductProvider()),
+        ChangeNotifierProvider(create: (_) => OrderProvider()),
       ],
       child: const MyApp(),
     ),

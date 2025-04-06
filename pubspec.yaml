@@ -50,7 +50,6 @@ flutter:
     - assets/images/laptops/microsoft/
     - assets/images/laptops/msi/
     - assets/images/laptops/samsung/
-    - assets/icons/
     - assets/translations/
     - assets/images/icon.png
 
